@@ -22,7 +22,6 @@ $app->before(function (Request $request) use ($app) {
 
 
     // Adding Twig globals
-    $app['twig']->addGlobal('mobileDetect', $app['mobile_detect']);
     $app['twig']->addGlobal('request', $request);
     // $app['twig']->addGlobal('notification_number', 8);
 
