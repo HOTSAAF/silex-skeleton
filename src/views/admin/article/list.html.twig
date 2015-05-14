@@ -1,0 +1,92 @@
+{% extends "admin/_base.html.twig" %}
+
+{% block headline %}
+    {% embed "admin/includes/_headline.html.twig" %}
+        {% block headline_title %}
+            Hírek
+        {% endblock %}
+        {% block headline_description %}
+            A feltöltött hírek listája
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block content %}
+    <section class="c-content">
+        <div class="c-content__headline">
+
+            <div class="c-filter">
+                <span class="s-admin-icon c-filter__icon"></span>
+                {{ form(filter_form) }}
+            </div>
+
+            <h2 class="c-content__title">Hírek listája ( {{ paginator|length }} darab )</h2>
+            <span class="c-content__description">A lista elemeit a feliratokkal rendezhetjük a szabadszavas keresőben pedig szűrhetünk közöttük</span>
+
+        </div>
+
+        <table class="c-list-table">
+            <thead>
+                <tr class="c-list-table__tr">
+                    <th class="c-list-table__th">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_article_index',
+                            'label': 'Id',
+                            'ordered_property': 'id',
+                            'default_orderer': 'asc'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th c-list-table__th--emp">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_article_index',
+                            'label': 'Cím',
+                            'ordered_property': 'title'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_article_index',
+                            'label': 'Létrehozás dátuma',
+                            'ordered_property': 'createdAt'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_article_index',
+                            'label': 'Utolsó frissítés dátuma',
+                            'ordered_property': 'updatedAt'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th c-list-table__th--operations">Műveletek</tr>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Article in paginator %}
+                    <tr class="c-list-table__tr">
+                        <td class="c-list-table__td">{{ Article.id }}</td>
+                        <td class="c-list-table__td">{{ Article.title|shorten(30) }}</td>
+                        <td class="c-list-table__td">{{ Article.createdAt|date('Y-m-d H:i') }}</td>
+                        <td class="c-list-table__td">{{ Article.updatedAt|date('Y-m-d H:i') }}</td>
+                        <td class="c-list-table__td c-list-table__td--operations">
+                            <a href="javascript:void(false);" class="c-operation-btn">
+                                <span class="s-admin-icon s-admin-icon-edit"></span>
+                            </a>
+                            <form action="{{ path('admin_article_remove', {'id':Article.id}) }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                                "swal": {
+                                    "title": "Megerősítés",
+                                    "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                                },
+                                "isForm": true
+                            }'>
+                                <button class="s-admin-icon s-admin-icon-delete"></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ paginator|raw }}
+
+    </section>
+{% endblock %}

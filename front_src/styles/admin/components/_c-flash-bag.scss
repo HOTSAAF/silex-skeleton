@@ -1,0 +1,61 @@
+$amp: ".c-flash-bag";
+
+#{$amp} {
+    padding: 10px 25px;
+    margin-bottom: 40px;
+    font-size: 12px;
+    line-height: 20px;
+    color: $c-armadillo;
+    position: relative;
+
+    &__ph {
+        margin-bottom: 5px;
+        text-align: center;
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &--align {
+
+            &_l {
+                text-align: left;
+            }
+
+            &_r {
+                text-align: right;
+            }
+        }
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        margin-left: 25px;
+        transform: translateY(-50%) scale(0.3, 0.3);
+        @include sprite($cross);
+        cursor: pointer;
+    }
+
+    &--state {
+        &_success {
+            border: 1px solid $c-wasabi;
+            background-color: hex-to-rgba($c-wasabi, .17);
+        }
+
+        &_error {
+            border: 1px solid $c-mandy;
+            background-color: hex-to-rgba($c-mandy, .17);
+        }
+
+        &_warning {
+            border: 1px solid $c-regent-st-blue;
+            background-color: hex-to-rgba($c-regent-st-blue, .17);
+        }
+
+        &_info {
+            border: 1px solid $c-carrot-orange;
+            background-color: hex-to-rgba($c-carrot-orange, .17);
+        }
+    }
+}

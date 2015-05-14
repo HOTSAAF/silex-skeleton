@@ -1,0 +1,5 @@
+// This function appends a version number to the image-urls, which can be found
+// in the global configuration.
+@function v-image-url($path) {
+    @return image-url($path + "?" + v#{$g-asset-version});
+}

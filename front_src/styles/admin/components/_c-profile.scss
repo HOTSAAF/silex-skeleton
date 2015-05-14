@@ -1,0 +1,32 @@
+$amp: ".c-profile";
+
+#{$amp} {
+    padding-left: 20px;
+    margin-right: 60px;
+    %dib-valign {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -3px; // ghost line-height
+    }
+
+    &__nick {
+        @extend %dib-valign;
+        font-size: 14px;
+    }
+
+    &__logout {
+        @include sprite($logout);
+        @extend %dib-valign;
+        margin: 0 10px;
+    }
+
+    &__avatar {
+        @extend %dib-valign;
+        margin-right: 10px;
+        > img {
+            @extend %dib-valign;
+            margin-top: 0;
+        }
+    }
+
+}

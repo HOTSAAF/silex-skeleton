@@ -1,0 +1,2 @@
+# Configurations declared here are registered in the app container as is.
+# Example can be found in the config_dev.yml file.

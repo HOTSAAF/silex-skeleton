@@ -1,0 +1,39 @@
+{% set flash_bag_messages = app.session.getFlashBag.get(request.get('_route') ~ '_success') %}
+{% if flash_bag_messages|length > 0 %}
+    <div class="jsc-block-hider c-flash-bag c-flash-bag--state_success">
+        <div class="jsc-block-hider__close-btn s-admin-icon c-flash-bag__close-btn"></div>
+        {% for message in flash_bag_messages %}
+            <div class="c-flash-bag__ph">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% set flash_bag_messages = app.session.getFlashBag.get(request.get('_route') ~ '_error') %}
+{% if flash_bag_messages|length > 0 %}
+    <div class="jsc-block-hider c-flash-bag c-flash-bag--state_error">
+        <div class="jsc-block-hider__close-btn s-admin-icon c-flash-bag__close-btn"></div>
+        {% for message in flash_bag_messages %}
+            <div class="c-flash-bag__ph">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% set flash_bag_messages = app.session.getFlashBag.get(request.get('_route') ~ '_warning') %}
+{% if flash_bag_messages|length > 0 %}
+    <div class="jsc-block-hider c-flash-bag c-flash-bag--state_warning">
+        <div class="jsc-block-hider__close-btn s-admin-icon c-flash-bag__close-btn"></div>
+        {% for message in flash_bag_messages %}
+            <div class="c-flash-bag__ph">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% set flash_bag_messages = app.session.getFlashBag.get(request.get('_route') ~ '_info') %}
+{% if flash_bag_messages|length > 0 %}
+    <div class="jsc-block-hider c-flash-bag c-flash-bag--state_info">
+        <div class="jsc-block-hider__close-btn s-admin-icon c-flash-bag__close-btn"></div>
+        {% for message in flash_bag_messages %}
+            <div class="c-flash-bag__ph">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}

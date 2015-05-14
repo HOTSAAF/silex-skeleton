@@ -1,0 +1,53 @@
+// These are the fonts the "ff" function uses as a fallback.
+$g-fallback-font: "Open Sans", Arial, sans-serif;
+
+// The version number used by the `v-image-url` function
+$g-asset-version: 1;
+
+// All colors on the site must be saved here as a variable.
+// The variables must be prefixed with "c-", and the name must be the color's
+// name. For inspiration on the color names, you can use this:
+// http://chir.ag/projects/name-that-color
+// Also, the color name must be in all lowercase, with the syllables separated
+// by a dash. (Ex.: "$c-this-is-a-color")
+// This convention is based on the following discussion: https://trello.com/c/zJwuLnvf
+$c-white: #fff;
+$c-black: #000;
+$c-concrete: #f2f2f2;
+$c-blue-bayoux: #4f5f6f;
+$c-regent-gray: #7e8e9f;
+$c-champagne: #fbefd6;
+$c-gamboge: #E8A30A;
+$c-armadillo: #464239;
+$c-mercury: #e4e4e4;
+$c-cadet-blue: #a1b1c2;
+$c-geyser: #d7dde7;
+$c-ghost: #c9d1da;
+$c-well-read: #b63531;
+$c-eastern-blue: #2394bb;
+
+//FlashBag colors
+$c-wasabi: #74992d; // Success
+$c-mandy: #e7515d; // Error
+$c-regent-st-blue: #a0d3e8; // Info
+$c-carrot-orange: #f08a24; // Warning
+
+
+// Admin left panel colors
+$c-panel-bgcolor: #93225f;
+$c-hover-bgcolor: #eb6567;
+
+$site-main-width: 1140px;
+
+// font-weights
+$fw-thin       : 100;
+$fw-extralight : 200;
+$fw-light      : 300;
+$fw-normal     : 400;
+$fw-regular    : 400;
+$fw-medium     : 500;
+$fw-semibold   : 600;
+$fw-bold       : 700;
+$fw-black      : 700;
+$fw-extrabold  : 800;
+$fw-ultrabold  : 900;

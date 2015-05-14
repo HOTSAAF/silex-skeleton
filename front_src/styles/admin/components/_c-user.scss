@@ -1,0 +1,54 @@
+$amp: ".c-user";
+
+#{$amp} {
+    float: right;
+    line-height: 70px;
+
+    %dib-valign {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__notification {
+        position: relative;
+        padding-right: 30px;
+        line-height: 24px;
+        height: 24px;
+        text-decoration: none;
+        color: $c-white;
+        border-right: solid 2px $c-ghost;
+        @extend %dib-valign;
+        &--new {
+            .c-user__number {
+                display: block;
+            }
+        }
+
+    }
+
+        &__icon {
+            @include sprite($bell);
+            @extend %dib-valign;
+        }
+
+        &__number {
+            color: $c-white;
+            background-color: $c-well-read;
+            font-size: 10px;
+            font-weight: $fw-bold;
+            height: 20px;
+            line-height: 20px;
+            width: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: -5px;
+            left: 10px;
+            text-align: center;
+            display: none;
+        }
+
+    &__profile {
+        @extend %dib-valign;
+    }
+
+}

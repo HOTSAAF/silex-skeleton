@@ -1,0 +1,34 @@
+{% extends "_base.html.twig" %}
+
+{% form_theme contact_form 'form/contact_form.html.twig' %}
+
+{% block head_end %}
+    {{ parent() }}
+    <script src='https://www.google.com/recaptcha/api.js?hl={{ request.locale }}'></script>
+{% endblock %}
+
+{% block content %}
+    {# {% include 'partials/home/paralax.html.twig' %} #}
+    {#
+        Would be nice, but can't be done, since adding classes through the attr
+        call adds them to the form AND also to the wrapping div element.
+    #}
+    {# {{ form(contact_form, {
+        attr: {
+            class: 'jsc-contact-form'
+        }
+    }) }} #}
+
+    {#
+        With Ajax call
+        Adding `novalidate: ''` to the attr object lets you debug server-side
+        validation.
+    #}
+    <div class="jsc-contact-form c-contact-form">
+        {{ form(contact_form, {
+            attr: {
+                novalidate: ''
+            }
+        }) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% trans_default_domain 'admin_login' %}
+
+<!DOCTYPE html>
+<html lang="{{ request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'meta_title'|trans({'%project%': 'Silex Skeleton'}) }}</title>
+    <link rel="stylesheet" href="{{ asset('bower/foundation/css/foundation.css') }}">
+</head>
+<body>
+
+    <br><br><br><br>
+
+    <div class="row">
+        <div class="small-3 column">
+            <br>
+        </div>
+        <div class="small-6 column">
+            <form action="{{ path('admin_login_check') }}" method="post">
+                {% if error is defined and error %}
+                    <div data-alert class="alert-box alert">
+                      Hibás belépési adatok.
+                      <a href="#" class="close">&times;</a>
+                    </div>
+                {% endif %}
+                <input type="hidden" name="_username" value="admin">
+                {#
+                <div class="row">
+                    <div class="small-12 column">
+                        <label for="login_username">Felhasználónév
+                            <input id="login_username" type="text" name="_username" value="{{ last_username }}">
+                        </label>
+                    </div>
+                </div>
+                #}
+                <div class="row">
+                    <div class="small-2 column text-center"><br></div>
+                    <div class="small-8 column text-center">
+                        <label for="login_password">Jelszó
+                            <input autofocus="true" id="login_password" type="password" name="_password" value="">
+                        </label>
+                    </div>
+                    <div class="small-2 column text-center"><br></div>
+                </div>
+                <div class="row">
+                    <div class="small-12 column text-center">
+                        <input class="button small" type="submit" value="Belépés">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="small-3 column">
+            <br>
+        </div>
+    </div>
+
+    {% include 'includes/cdn_asset.html.twig' with {
+        remote_url: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+        local_url: asset('bower/jquery/dist/jquery.js'),
+        global_object: 'jQuery',
+    } only %}
+    <script src="{{ asset('bower/foundation/js/foundation.js') }}"></script>
+    {# <script src="{{ asset('js/admin.js') }}"></script>  #}
+</body>
+</html>

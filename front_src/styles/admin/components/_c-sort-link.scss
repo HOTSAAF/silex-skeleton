@@ -1,0 +1,56 @@
+$amp: ".c-sort-link";
+
+#{$amp} {
+    color: $c-blue-bayoux;
+    position:relative;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+    &:not(.c-sort-link--asc):not(.c-sort-link--desc) {
+        &:hover {
+            color: $c-blue-bayoux;
+            .c-sort-link__arrow {
+                top: 8px;
+                height: 10px;
+                background: v-image-url('admin/desc.png') no-repeat center center;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__arrow {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+        opacity: .3;
+        width: 10px;
+        height: 12px;
+        background: v-image-url('admin/sortable.png') no-repeat center center;
+    }
+
+    &--asc {
+        .c-sort-link__arrow {
+            height: 10px;
+            bottom: 3px;
+            background: v-image-url('admin/asc.png') no-repeat center center;
+            opacity: 1;
+        }
+
+        // &:hover {
+        //     @extend .c-sort-link--desc;
+        // }
+    }
+
+    &--desc {
+        .c-sort-link__arrow {
+            top: 8px;
+            height: 10px;
+            background: v-image-url('admin/desc.png') no-repeat center center;
+            opacity: 1;
+        }
+
+        // &:hover {
+        //     @extend .c-sort-link--asc;
+        // }
+    }
+}

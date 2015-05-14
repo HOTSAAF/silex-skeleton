@@ -1,0 +1,11 @@
+errors:
+  - unexpected_error
+
+contact_form:
+  - label_send_btn
+
+admin_header:
+  - key: test
+    groups:
+        - admin
+        - site

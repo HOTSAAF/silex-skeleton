@@ -1,0 +1,32 @@
+$amp: ".c-filter";
+
+#{$amp} {
+    float: right;
+    border: solid 1px $c-geyser;
+    width: 235px;
+    height: 38px;
+    margin-left: 20px;
+
+    &__icon {
+        @include sprite($search);
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 8px 0 12px;
+        line-height: 15px;
+    }
+
+    &__form {
+        display: inline-block;
+        vertical-align: middle;
+        width: 185px;
+        line-height: 15px;
+    }
+
+    &__input {
+        border: none;
+        width: 100%;
+        outline: none;
+        font-size: 13px;
+        color: $c-regent-gray;
+    }
+}

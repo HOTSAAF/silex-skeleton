@@ -1,0 +1,16 @@
+$amp: ".c-operation-btn";
+
+#{$amp} {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    margin: 0 7px;
+    outline: none;
+
+    button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        outline: none;
+    }
+}

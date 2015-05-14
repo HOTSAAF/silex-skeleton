@@ -1,0 +1,13 @@
+$amp: ".c-parallax";
+
+#{$amp} {
+    // Example
+    height: 1000px;
+    margin-top: 300px;
+    text-align: center;
+    &__element {
+        transition: transform .3s ease-out;
+        margin-left: 20px;
+        width: 600px;
+    }
+}

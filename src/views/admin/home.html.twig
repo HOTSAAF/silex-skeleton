@@ -1,0 +1,331 @@
+{% extends "admin/_base.html.twig" %}
+
+{% block content %}
+    <section class="c-content">
+        <div class="c-content__headline">
+
+            <div class="c-filter">
+                <span class="s-admin-icon c-filter__icon"></span>
+                {{ form(filter_form) }}
+            </div>
+
+            <h2 class="c-content__title">Hírek listája ( x darab )</h2>
+            <span class="c-content__description">A lista elemeit a feliratokkal rendezhetjük a szabadszavas keresőben pedig szűrhetünk közöttük</span>
+
+        </div>
+
+        <table class="c-list-table">
+            <thead>
+                <tr class="c-list-table__tr">
+                    <th class="c-list-table__th c-list-table__th--emp">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_home',
+                            'label': 'Listaelem megnevezése',
+                            'ordered_property': 'name',
+                            'default_orderer': 'asc'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_home',
+                            'label': 'Dátum',
+                            'ordered_property': 'date'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_home',
+                            'label': 'Parameter',
+                            'ordered_property': 'param_one'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th">
+                        {% include 'admin/includes/_sortable_th_label.html.twig' with {
+                            'route_name': 'admin_home',
+                            'label': 'Parameter',
+                            'ordered_property': 'param_two'
+                        } only %}
+                    </th>
+                    <th class="c-list-table__th c-list-table__th--operations">Műveletek</tr>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="c-list-table__tr">
+                    <td class="c-list-table__td c-list-table__td--emp">Lista megnevezés bizonyos hossz</td>
+                    <td class="c-list-table__td">{{ 'now'|date('Y-m-d H:i') }}</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td">igen</td>
+                    <td class="c-list-table__td c-list-table__td--operations">
+                        <a href="javascript:void(false);" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Teszt megerősítés linkekre!"
+                            }
+                        }'>
+                            <span class="s-admin-icon s-admin-icon-edit"></span>
+                        </a>
+                        <form action="{{ path('admin_home') }}" class="c-operation-btn jsc-swal" data-jsc-swal='{
+                            "swal": {
+                                "title": "Megerősítés",
+                                "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                            },
+                            "isForm": true
+                        }'>
+                            <button class="s-admin-icon s-admin-icon-delete"></button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

@@ -1,0 +1,6 @@
+---
+contact_form_name_not_blank: "A \"név\" mező megadása kötelező."
+contact_form_name_length_min: "A név túl rövid. Legalább {{ limit }} karakter hosszú kell legyen."
+contact_form_name_length_max: "A név túl hosszú. Legfeljebb {{ limit }} karakter hosszú lehet."
+contact_form_callback: "A(z) \"{{ value }}\" név tiltólistán szerepel. Kérlek válassz más nevet.\""
+recaptcha_error: "A captcha ellenőrzése sikertelen volt."

@@ -1,0 +1,31 @@
+{
+  "name": "project",
+  "//": "sweetalert.scss copied style/owerrides",
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "modernizr": "~2.8.3",
+    "foundation": "~5.5.0",
+    "sweetalert": "0.4.1"
+  },
+  "devDependencies": {
+    "sass-mediaqueries": "~1.4.0",
+    "normalize-scss": "~3.0.2",
+    "bourbon": "~3.1.8",
+    "clam": "0.4.1-alpha",
+    "q": "~1.0"
+  },
+  "overrides": {
+    "modernizr": {
+      "main": [
+        "modernizr.js"
+      ]
+    },
+    "foundation": {
+      "main": [
+        "css/foundation.css",
+        "css/foundation.css.map",
+        "js/foundation.min.js"
+      ]
+    }
+  }
+}

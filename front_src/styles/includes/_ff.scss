@@ -1,0 +1,8 @@
+/**
+ * Adds the project's fallback fonts to the font-family passed as the parameter.
+ * This function relies on the global variable '$g-fallback-font', which must be
+ * specified in `config/global.scss`.
+ */
+@function ff($fontFamily) {
+   @return $fontFamily, $g-fallback-font;
+}

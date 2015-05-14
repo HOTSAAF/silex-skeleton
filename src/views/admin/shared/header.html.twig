@@ -1,0 +1,32 @@
+{% trans_default_domain 'admin_header' %}
+
+<header id="header">
+    <hgroup class="c-grid clearfix">
+        <div class="c-grid__panel c-grid__panel--left">
+            <a href="{{ path('home') }}">
+                <img src="{{ asset('images/admin/logo.png') }}" alt="">
+            </a>
+        </div>
+        <div class="c-grid__panel c-grid__panel--right">
+        {% spaceless %}
+                <section class="c-user">
+                    {% if notification_number is defined %}
+                        <a href="javascript:void(false);" class="c-user__notification {{ notification_number ? 'c-user__notification--new' : '' }}">
+                            <span class="s-admin-icon c-user__icon"></span>
+                            <span class="c-user__number">{{ notification_number }}</span>
+                        </a>
+                    {% endif %}
+                    <div class="c-user__profile">
+                        <div class="c-profile">
+                            <div class="c-profile__avatar">
+                                <img src="{{ asset('images/admin/avatar_placeholder.png') }}" alt="">
+                            </div>
+                            <div class="c-profile__nick">{{ app.security.token.user.username|capitalize }}</div>
+                            <a href="{{ path('admin_logout') }}" class="s-admin-icon c-profile__logout"></a>
+                        </div>
+                    </div>
+                </section>
+            {% endspaceless %}
+        </div>
+    </hgroup>
+</header>

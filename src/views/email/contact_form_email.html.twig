@@ -1,0 +1,9 @@
+{% trans_default_domain 'contact_form' %}
+
+<h3>{{ 'email_title'|trans }}</h3>
+
+<b>{{ 'email_label_name'|trans }}:</b> {{ contact_form.name.data }}<br>
+<b>{{ 'email_label_email'|trans }}:</b> {{ contact_form.email.data }}<br>
+<b>{{ 'email_label_content'|trans }}:</b> {{ contact_form.content.data }}<br><br>
+
+<b>{{ 'email_label_date'|trans }}:</b> {{ date.format("Y-m-d H:i") }}

@@ -1,0 +1,5 @@
+---
+success_msg: Success Lorem ipsum dolor sit amet
+error_msg: Error Lorem ipsum dolor sit amet
+warning_msg: Info Lorem ipsum dolor sit amet
+info_msg: Warning Lorem ipsum dolor sit amet

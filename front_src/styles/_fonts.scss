@@ -1,0 +1,5 @@
+// Fonts should be stored in the "fonts/" folder inside the public folder.
+// The following bourbon mixin will generate the proper css ruleset.
+// It will search the "CustomFont" folder for files like: "CustomFont.ttf",
+// "CustomFont.woff", etc.
+// @include font-face(CustomFont, "../fonts/CustomFont/CustomFont");

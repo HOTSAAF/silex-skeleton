@@ -1,0 +1,7 @@
+# Configurations declared here are registered in the app container as is.
+# Ex: "debug" is available via: `$app['debug']`.
+
+# Debugging disables hard caches, adds the web profiler etc.
+# If it's false (Ex.: prod env) caching is more aggressive, monolog adds the
+# Slack and/or SwiftMailer handlers, etc.
+debug: true

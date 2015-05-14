@@ -1,0 +1,43 @@
+
+<a
+    class="c-sort-link
+        {% if
+            request.get('order') is defined and
+            ordered_property in request.get('order')
+        %}
+            {{ 'asc' in request.get('order') ? 'c-sort-link--asc':'c-sort-link--desc' }}
+        {% elseif
+            request.get('order') is not defined and
+            default_orderer is defined
+        %}
+            c-sort-link--{{ default_orderer }}
+        {% endif %}
+    "
+    href="
+    {{
+        path(
+            route_name,
+            request.query.all()|merge({
+            'order':
+                ordered_property ~
+                '.' ~
+                (
+                    (
+                        (
+                            request.get('order') is defined and
+                            request.get('order') == (ordered_property ~ '.asc')
+                        ) or
+                        (
+                            request.get('order') is not defined and
+                            default_orderer is defined and
+                            default_orderer == 'asc'
+                        )
+                    ) ? 'desc':'asc'
+                )
+            })
+        )
+    }}"
+>
+    {{ label }}
+    <span class="c-sort-link__arrow"></span>
+</a>

@@ -1,0 +1,56 @@
+{% trans_default_domain 'admin_base' %}
+<!DOCTYPE html>
+<html lang="{{ request.locale }}">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ 'meta_title'|trans({'%project%': 'Silex Skeleton'}) }}</title>
+
+        {# {% include 'shared/favicons.html.twig' %} #}
+
+        <link rel="stylesheet" href="{{ asset('bower/sweetalert/lib/sweet-alert.css') }}">
+        {# <link rel="stylesheet" href="{{ asset('bower/foundation/css/foundation.css') }}"> #}
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        {# <div id="elfinder"></div> #}
+
+        {% include 'admin/shared/header.html.twig' %}
+
+        <div class="c-grid clearfix" data-equalizer>
+            <aside class="c-grid__panel c-grid__panel--left-bg"></aside>
+            <aside id="sidebar" class="c-grid__panel c-grid__panel--left" {# data-equalizer-watch #}>
+                {% include 'admin/shared/sidebar.html.twig' %}
+            </aside>
+
+            <aside id="main" class="c-grid__panel c-grid__panel--right" {# data-equalizer-watch #}>
+                <section class="c-page">
+                    {% block headline %}
+                        {% embed "admin/includes/_headline.html.twig" %}{% endembed %}
+                    {% endblock %}
+
+                    {% include 'admin/shared/flash_bag.html.twig' %}
+
+                    {{ render(controller('App\\Controller\\RenderController::adminGoodToKnow')) }}
+
+                    {% block content %}{% endblock %}
+                </section>
+                {% include 'admin/shared/footer.html.twig' %}
+            </aside>
+        </div>
+
+        {% include 'includes/cdn_asset.html.twig' with {
+            remote_url: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            local_url: asset('bower/jquery/dist/jquery.js'),
+            global_object: 'jQuery',
+        } only %}
+
+        {{ render(controller('App\\Controller\\RenderController::jsConfig', { 'transGroup': 'admin' })) }}
+        <script src="{{ asset('bower/sweetalert/lib/sweet-alert.js') }}"></script>
+        <script src="{{ asset('bower/foundation/js/foundation.min.js') }}"></script>
+        <script src="{{ asset('js/admin.js') }}"></script>
+    </body>
+</html>

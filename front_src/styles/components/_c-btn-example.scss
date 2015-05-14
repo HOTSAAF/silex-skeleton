@@ -1,0 +1,181 @@
+// THIS IS AN EXAMPLE FILE, READ THE COMMENTS
+
+// Notes:
+// - In a real project, colors must be collected to variables and stored in the
+//   config/_global.scss file.
+// - To test how this button behaves on mobile devices, add the "md_isMobile"
+//   class to the 'html' tag.
+// - At the end of this file, there's an example HTML for testing purposes
+
+// 'amp' is a short version of 'ampersand' (&). It's called that, since in most
+// cases it tries to imitate the & sign on a block level.
+$amp: ".c-btn-example";
+
+#{$amp} {
+    // SASS variables are scoped to the current closure, feel free to use them.
+    $transitionSpeed: .2s;
+
+    display: block;
+    cursor: pointer;
+    background: #ccc;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 14px;
+    line-height: 1em;
+    padding: 10px 20px;
+
+    // Don't use 'all' for transitions if it's avoidable. Specifying the exact
+    // properties which to animate helps avoiding future surprises.
+    // Also: Don't prefix the rules, the autoprefixer will do that for you.
+    transition:
+        background-color $transitionSpeed,
+        border-color $transitionSpeed,
+        color $transitionSpeed;
+
+    // Modifier syntax
+    &--inline {
+        display: inline-block;
+    }
+
+    // Modifier with a value
+    &--bg {
+        &_red {
+            background-color: #f00;
+        }
+
+        &_green {
+            background-color: #0f0;
+        }
+
+        &_blue {
+            background-color: #00f;
+        }
+    }
+
+    // Element
+    &__highlight {
+        display: inline-block;
+        background: #000;
+        color: #fff;
+        padding: 5px 10px;
+        transition: background-color .2s;
+
+        // Modifier on element
+        &--light {
+            background: #666;
+        }
+    }
+
+    // For hover effects, that should not trigger on mobile.
+    // This snippet assumes, that this can be detected via the md_isMobile class
+    html:not(.md_isMobile) & {
+        &:hover {
+            // Changing some rules on hover, but only on desktop devices
+            @extend %hover;
+        }
+
+        &--bg_red:hover {
+            @extend %hover-red;
+        }
+
+        &--bg_green:hover {
+            @extend %hover-green;
+        }
+
+        &--bg_blue:hover {
+            @extend %hover-blue;
+        }
+    }
+
+    // Rules defined here will only activate on mobile devices. So for example:
+    // if a hover effect must be shown by default on mobile devices, then this
+    // is the place to define the appropriate rules.
+    html.md_isMobile & {
+        &--active-by-default {
+            @extend %hover;
+
+            &#{$amp}--bg_red {
+                @extend %hover-red;
+            }
+
+            &#{$amp}--bg_green {
+                @extend %hover-green;
+            }
+
+            &#{$amp}--bg_blue {
+                @extend %hover-blue;
+            }
+        }
+    }
+
+    // Snippet for language-specific rules
+    // html[lang=en] & {
+    //
+    // }
+}
+
+// A placeholder for hover effects. It could be prefixed by the component's
+// name, so that it wouldn't pollute the global scope and cause problems, but
+// for a "small" demonstration, I didn't want to complicate things even more.
+// Keep in mind, that in theory, if a %hover placeholder was defined before
+// this, it would be overwritten by the following definition.
+%hover {
+    & {
+        background: darken(#ccc, 20%);
+        color: #fff;
+
+        // The higlighted elements must have custom hover colors
+        #{$amp}__highlight {
+            background-color: lighten(#000, 30%);
+
+            &--light {
+                background-color: lighten(#666, 30%);
+            }
+        }
+    }
+
+    &-red {
+        background: darken(#f00, 20%);
+    }
+
+    &-green {
+        background: darken(#0f0, 20%);
+    }
+
+    &-blue {
+        background: darken(#00f, 20%);
+    }
+}
+
+// Example HTML for testing purposes
+// <div class="c-btn-example">
+//     BTN: basic
+// </div>
+// <br>
+// <div class="c-btn-example c-btn-example--active-by-default">
+//     BTN: active by default on mobile devices
+// </div>
+// <br>
+// <div class="c-btn-example c-btn-example--active-by-default">
+//     BTN: lorem
+//     <span class="c-btn-example__highlight">ipsum</span> dolor
+//     <span class="c-btn-example__highlight c-btn-example__highlight--light">sit amet</span>
+// </div>
+// <br>
+// <div>
+//     <div class="c-btn-example c-btn-example--inline c-btn-example--bg_red">
+//         BTN: inline, red bg
+//     </div>
+//     <div class="c-btn-example c-btn-example--inline c-btn-example--bg_green">
+//         BTN: inline, green bg
+//     </div>
+//     <div class="c-btn-example c-btn-example--inline c-btn-example--bg_blue">
+//         BTN: inline, blue bg
+//     </div>
+// </div>
+// <br>
+// <div>
+//     <div class="c-btn-example c-btn-example--inline c-btn-example--bg_green c-btn-example--active-by-default">
+//         BTN: inline, red bg, active by default on mobile devices
+//     </div>
+// </div>

@@ -1,0 +1,26 @@
+{% if data.pageCount %}
+    <ul class="c-paginate">
+        {% spaceless %}
+            {% for page in data.pagesInRange %}
+                <li class="c-paginate__li">
+                    {% if page == request.get('page', 1) %}
+                        <span class="c-paginate__current">{{ page }}</span>
+                    {% else %}
+                        <a
+                            class="c-paginate__link"
+                            href="
+                            {{
+                                path(
+                                    routeName,
+                                    request.query.all()|merge({'page': page })
+                                )
+                            }}"
+                        >
+                            {{ page }}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        {% endspaceless %}
+    </ul>
+{% endif %}

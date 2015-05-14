@@ -1,0 +1,20 @@
+
+# To disable
+# App\Entity\Article: []
+
+App\Entity\Article:
+    news_shared (template):
+        title (unique): <sentence(3)>
+        description: <paragraph(5)>
+        extract: <paragraph(2)>
+        createdAt: <dateTimeThisMonth()>
+        updatedAt: <dateTimeThisMonth()>
+    news_{1..10} (extends news_shared):
+        setImageByPath: ['src/App/DataFixtures/resources/images/article/article_<numberBetween(1, 5)>.jpg']
+        activatedAt: <dateTimeThisMonth()>
+    news_{11..20} (extends news_shared):
+        setImageByPath: ['src/App/DataFixtures/resources/images/article/article_<numberBetween(1, 5)>.jpg']
+        activatedAt: <dateTimeBetween('now', '+200 days')>
+    news_{21..50} (extends news_shared):
+        setImageByPath: ['src/App/DataFixtures/resources/images/article/article_<numberBetween(1, 5)>.jpg']
+        activatedAt: <dateTimeBetween('-200 days', 'now')>

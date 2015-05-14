@@ -1,0 +1,11 @@
+/**
+ * Converts a hex (like: "#fff") to an rgba value, with the given alpha value.
+ * Ex.: `hex-to-rgba(#fff, .5)` will result in "rgba(255, 255, 255, .5)".
+ */
+@function hex-to-rgba($color, $alpha) {
+   $red: red($color);
+   $green: green($color);
+   $blue: blue($color);
+
+   @return rgba($red, $green, $blue, $alpha);
+}

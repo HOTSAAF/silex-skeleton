@@ -1,0 +1,10 @@
+{% extends "_base.html.twig" %}
+
+{% block content %}
+    Hey, I have some "Good To Know" facts:
+    <ul>
+        {% for fact in good_to_know %}
+            <li>{{ fact }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

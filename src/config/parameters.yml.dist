@@ -1,0 +1,27 @@
+# Configurations declared here are registered in the app container under the
+# "config" key. Ex: "db" is available via: `$app['config']['db']`.
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: ~
+    database_name: silex-skeleton
+    database_user: root
+    database_password: ~
+    mailer_host: localhost # On production, this must be "localhost", or mail sending will timeout.
+    mailer_user: noreply@localhost
+    mailer_password: ~
+    swift_use_spool: false # Look in the ApiController for explanation
+    app_name: silex-skeleton # Used by monolog
+    maintenance: false
+    contact_form_target: ~
+    monolog_slack_handler_channel: ~
+    # Only needed if the SwiftMailer Handler is added to the monolog logger
+    # swift_mailer_handler:
+    #     critical_error_notification_to: error@zalehy.com
+    monolog_slack_handler_token: ~
+    google_analytics_id: ~
+    one_sky_api_key: ~
+    one_sky_api_secret: ~
+    one_sky_project_id: ~
+    mailchimp_secret_api: ~
+    mailchimp_list_id: ~

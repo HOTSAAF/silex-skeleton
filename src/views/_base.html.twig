@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="{{ app.locale }}" class="{% include 'shared/mobile_detect.html.twig' %}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+
+        {% trans_default_domain 'meta' %}
+        <title>{% block title %}{{ 'base_title'|trans }}{% endblock %}</title>
+        <meta property="og:title" content="{% block og_title %}{{ 'base_title'|trans }}{% endblock %}">
+        <meta name="description" content="{% block description %}{{ 'default_description'|trans }}{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}{{ 'default_description'|trans }}{% endblock %}">
+        <meta property="og:url" content="{{ request.schemeAndHttpHost ~ path(request.attributes.get('_route'), request.attributes.get('_route_params')) }}">
+        <meta property="og:type" content="website">
+        {% block meta_image %}
+            <meta property="og:image" content="{{ request.schemeAndHttpHost ~ (asset('images/share.jpg')) }}">
+        {% endblock %}
+        {% block meta %}{% endblock %}
+
+        {% include 'shared/favicons.html.twig' %}
+
+        {# <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet'> #}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% block styles %}{% endblock %}
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% block head_end %}{% endblock %}
+    </head>
+    <body id="body"
+        {% if request.attributes.get('_route') == 'news_article' %}
+            class="c-info--fbg_1"
+        {% endif %}
+    >
+        {# <div class="jsc-parallax"></div> #}
+        {# <div class="jsc-fader"></div> #}
+
+        {% block facebook %}{% endblock %}
+
+        {% include 'shared/browser_alert.html.twig' %}
+
+        {# <div class="jsm-fmq-detect"></div> #}
+
+        {% block header %}
+            {% include 'shared/header.html.twig' %}
+        {% endblock %}
+
+        {# {% include 'includes/test_image_loader.html.twig' %} #}
+        {% block content %}{% endblock %}
+
+        {% block footer %}
+            {% include 'shared/footer.html.twig' %}
+        {% endblock %}
+
+        {% include 'includes/cdn_asset.html.twig' with {
+            remote_url: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            local_url: asset('bower/jquery/dist/jquery.js'),
+            global_object: 'jQuery',
+        } only %}
+
+        {{ render(controller('App\\Controller\\RenderController::jsConfig')) }}
+
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script src="{{ asset('bower/modernizr/modernizr.js') }}"></script>
+        <script src="{{ asset('bower/foundation/js/foundation.min.js') }}"></script>
+        {% block scripts %}{% endblock %}
+
+        <script src="{{ asset('js/script.js') }}"></script>
+
+        {% include 'shared/ga.html.twig' with {'id': app.config.google_analytics_id} only %}
+    </body>
+</html>

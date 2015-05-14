@@ -1,0 +1,10 @@
+// Only very basic rules should be placed here.
+// Ex.: rules for certain tags, like the "body", disabling the "focus outline"
+// on buttons/textareas, etc.
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+    color: $c-black;
+    -webkit-font-smoothing: antialiased;
+}

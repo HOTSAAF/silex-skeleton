@@ -1,0 +1,41 @@
+{% trans_default_domain 'admin_sidebar' %}
+
+<ul class="c-navigation">
+    <li class="c-navigation__item {{ request.get('_route') == 'admin_home'?'c-navigation__item--active':'' }}">
+        <a href="{{ path('admin_home') }}" class="c-navigation__link">
+            <span class="s-admin-icon s-admin-icon-home c-navigation__icon"></span>
+            <span class="c-navigation__label">{{ "home_label"|trans }}</span>
+        </a>
+    </li>
+    <li class="c-navigation__item {{ request.get('_route') == 'admin_article_index'?'c-navigation__item--active':'' }}">
+        <a href="{{ path('admin_article_index') }}" class="c-navigation__link">
+            <span class="s-admin-icon s-admin-icon-envelope c-navigation__icon"></span>
+            <span class="c-navigation__label">{{ "article_label"|trans }}</span>
+        </a>
+    </li>
+    <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
+        <a href="{{ path('admin_home') }}" class="c-navigation__link">
+            <span class="s-admin-icon s-admin-icon-envelope c-navigation__icon"></span>
+            <span class="c-navigation__label">{{ "galery_label"|trans }}</span>
+        </a>
+    </li>
+    <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
+        <a href="{{ path('admin_home') }}" class="c-navigation__link">
+            <span class="s-admin-icon s-admin-icon-calendar c-navigation__icon"></span>
+            <span class="c-navigation__label">{{ "calendar_label"|trans }}</span>
+        </a>
+    </li>
+    <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
+        <a href="{{ path('admin_home') }}" class="c-navigation__link">
+            <span class="s-admin-icon s-admin-icon-analytics c-navigation__icon"></span>
+            <span class="c-navigation__label">{{ "analytics"|trans }}</span>
+        </a>
+    </li>
+    <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
+        <a href="{{ path('home') }}" class="c-navigation__link">
+            <span class="s-admin-icon s-admin-icon-gear c-navigation__icon"></span>
+            <span class="c-navigation__label">{{ "back_to_the_site_label"|trans }}</span>
+        </a>
+    </li>
+</ul>
+

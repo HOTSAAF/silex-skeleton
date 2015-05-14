@@ -1,0 +1,48 @@
+{
+    "name": "project",
+    "require": {
+        "php": ">=5.3.3",
+        "silex/silex": "~2.0@dev",
+        "silex/web-profiler": "~2.0@dev",
+        "symfony/browser-kit": "~2.3",
+        "symfony/class-loader": "~2.3",
+        "symfony/config": "~2.3",
+        "symfony/console": "~2.3",
+        "symfony/css-selector": "~2.3",
+        "symfony/debug": "~2.3",
+        "symfony/finder": "~2.3",
+        "symfony/form": "~2.3",
+        "symfony/monolog-bridge": "~2.3",
+        "symfony/process": "~2.3",
+        "symfony/security": "~2.3",
+        "symfony/validator": "~2.3",
+        "symfony/translation": "~2.3",
+        "symfony/twig-bridge": "~2.3",
+        "symfony/yaml": "~2.6",
+        "mobiledetect/mobiledetectlib": "~2.8",
+        "dflydev/doctrine-orm-service-provider": "~2.0",
+        "intervention/image": "~2.1",
+        "swiftmailer/swiftmailer": "~5.4",
+        "symfony/dependency-injection": "~2.3",
+        "symfony/doctrine-bridge": "~2.6",
+        "saxulum/saxulum-doctrine-orm-manager-registry-provider": "~3.0",
+    	"zeecoder/mailchimp-helper": "0.1.*@dev",
+        "google/recaptcha": "~1.1",
+        "doctrine/migrations": "1.0.*@dev",
+        "nelmio/alice": "^1.7",
+        "knplabs/knp-components": "~1.2"
+    },
+    "require-dev": {
+        "dg/ftp-deployment": "~2.1",
+        "zeecoder/onesky-helper": "0.1.*@dev"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "scripts": {
+        "run": [
+            "echo 'Started web server on http://localhost:8888'",
+            "php -S localhost:8888 -t web web/index_dev.php"
+        ]
+    }
+}

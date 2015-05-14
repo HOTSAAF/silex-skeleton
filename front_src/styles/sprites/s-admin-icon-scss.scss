@@ -1,0 +1,48 @@
+$search: -4px -4px 15px 14px;
+$logout: -4px -26px 15px 14px;
+$calendar: -4px -48px 20px 20px;
+$clock: -4px -76px 20px 20px;
+$analytics: -4px -104px 20px 20px;
+$home: -4px -132px 20px 20px;
+$bell: -4px -160px 20px 20px;
+$envelope: -4px -188px 20px 20px;
+$gear: -4px -216px 20px 20px;
+$delete: -4px -244px 25px 25px;
+$edit: -4px -277px 25px 25px;
+$cross: -4px -310px 36px 36px;
+
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 3);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 4);
+}
+
+@function sprite-width($sprite) {
+  @return nth($sprite, 3);
+}
+
+@function sprite-height($sprite) {
+  @return nth($sprite, 4);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 1);
+  $sprite-offset-y: nth($sprite, 2);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite($sprite) {
+  @include sprite-position($sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: block;
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+.s-admin-icon {
+  background-image: url('../images/sprites/s-admin-icon.png');
+}
+

@@ -1,0 +1,24 @@
+$amp: ".c-content";
+
+#{$amp} {
+    &__headline {
+        margin-bottom: 25px;
+    }
+        &__title {
+            font-weight: $fw-bold;
+            color: $c-blue-bayoux;
+            font-size: 18px;
+            line-height: 23px;
+            margin-top: -3px;
+            margin-bottom: 0;
+        }
+
+        &__description {
+            color: $c-regent-gray;
+            font-size: 14px;
+            line-height: 23px;
+            display: block;
+            margin-bottom: -2px;
+        }
+
+}

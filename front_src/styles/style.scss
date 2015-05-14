@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+// 3rd party
+@import "sass-mediaqueries/media-queries";
+@import "bourbon/app/assets/stylesheets/bourbon";
+@import "normalize-scss/normalize";
+
+// Foundation
+@import "foundation/scss/foundation/functions";
+// @import "foundation/scss/foundation/components/grid";
+// @import "foundation/scss/foundation/components/visibility";
+
+// Configurations
+// @import "config/foundation";
+@import "config/global";
+
+// Basic styles
+@import "fonts";
+@import "base";
+
+// Includes
+@import "includes/ff";
+@import "includes/v-image-url";
+@import "includes/hex-to-rgba";
+// @import "includes/set-em";
+// @import "includes/em-calc";
+
+// Components
+// @import "components/c-a-component";
+@import "components/c-parallax";
+@import "components/c-contact-form";
+
+// For every folder in the sprites/ folder, two scss files will be generated
+// containing sass mixins and css rules. The filenames will be the same as the
+// folder's name suffixed with either 'css' or 'scss'.
+// @import "sprites/s-icon-css";
+// @import "sprites/s-icon-scss";
+
+// Must always be at the bottom, so that it could overwrite anything temporarily.
+@import "shame";

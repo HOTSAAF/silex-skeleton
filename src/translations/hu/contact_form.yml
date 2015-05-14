@@ -1,0 +1,11 @@
+---
+label_name: Név
+label_email: "Válasz E-mail"
+label_content: Leírás
+label_send_btn: Küldés
+email_title: "The e-mail title"
+email_label_name: Név
+email_label_email: E-mail
+email_label_content: Leírás
+email_label_date: Küldve
+api_success: "The e-mail was succesfully sent."

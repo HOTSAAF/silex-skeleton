@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="hu" {# Should be: {{ request.locale }} #} class="{% include 'shared/mobile_detect.html.twig' %}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+
+        <title>{% block meta_title %}{% endblock %}</title>
+
+        {% include 'shared/favicons.html.twig' %}
+
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <h1 class="hide">{{ 'logo_seo_text'|trans({}, 'header') }}</h1>
+
+        <section class="c-info c-info--fbg_1 c-info--error c-info--visible c-info--bg_logo">
+            <div class="row collapse">
+                <div class="column small-12 c-info__container">
+                    <div class="row">
+                        <div class="column small-12 medium-5 c-info__content">
+                            <article>
+                                <h2 class="c-heading c-heading--error">{% block title %}{% endblock %}</h2>
+                                <p class="c-info__description">{% block description %}{% endblock %}</p>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="c-info__bg"></div>
+                </div>
+            </div>
+        </section>
+
+        {#
+        {% include 'includes/cdn_asset.html.twig' with {
+            remote_url: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            local_url: asset('bower/jquery/dist/jquery.js'),
+            global_object: 'jQuery',
+        } only %}
+
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script src="{{ asset('bower/modernizr/modernizr.js') }}"></script>
+        <script src="{{ asset('bower/foundation/js/foundation.min.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+         #}
+
+        {% include 'shared/ga.html.twig' with {'id': app.config.google_analytics_id} only %}
+    </body>
+</html>

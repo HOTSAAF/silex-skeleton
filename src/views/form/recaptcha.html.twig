@@ -1,0 +1,9 @@
+{% block recaptcha_field_row %}
+    {% spaceless %}
+        {# Easier to render it this way, but then we couldn't reset the captcha on error. #}
+        {# <div class="g-recaptcha" data-sitekey="{{ form.vars.api_site_key }}"></div> #}
+
+        {# A better way is to explicitly render the widget with the js sdk #}
+        <div class="{{ form.vars.attr.class }}"></div>
+    {% endspaceless %}
+{% endblock %}

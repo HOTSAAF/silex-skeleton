@@ -1,0 +1,25 @@
+$amp: ".c-page";
+
+#{$amp} {
+    padding: 60px 70px 0 300px;
+    &__headline {
+        margin-bottom: 40px;
+    }
+        &__title {
+            font-weight: $fw-bold;
+            color: $c-blue-bayoux;
+            font-size: 35px;
+            line-height: 35px;
+            margin-top: -3px;
+            margin-bottom: 15px;
+        }
+
+        &__description {
+            color: $c-regent-gray;
+            font-size: 16px;
+            line-height: 20px;
+            display: block;
+            margin-bottom: -2px;
+        }
+
+}

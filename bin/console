@@ -1,0 +1,73 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+set_time_limit(0);
+
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputOption;
+
+use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
+use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Symfony\Component\Console\Helper\HelperSet;
+use App\Providers\MigrationServiceProvider;
+use App\Util\AppUtility;
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
+
+AppUtility::setEnv($env);
+$app = require __DIR__.'/../src/app.php';
+
+$console = new Application('App', 'n/a');
+$console->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev'));
+
+$rootPath = __DIR__ . '/..';
+$ftp_config = require $rootPath . '/src/config/deploy_stages/ftp_config.php';
+$console->setDispatcher($app['dispatcher']);
+    // Every command class needs to be registered here
+    $console->addCommands([
+        new App\Command\GenerateAdminpassCommand(),
+        new App\Command\TransDownloadCommand(
+            $rootPath,
+            $app['config']['one_sky_helper'],
+            $app['config']['trans_download_command']
+        ),
+        new App\Command\BuildCommand(
+            $rootPath
+        ),
+        new App\Command\DeployCommand(
+            $rootPath,
+            $rootPath . '/src/config/deploy_stages'
+        ),
+        new App\Command\ParameterCheckerCommand(
+            $rootPath,
+            'silex-skeleton/src/config/parameters.yml',
+            $rootPath . '/src/config/parameters.yml.dist',
+            $ftp_config
+        ),
+        new App\Command\SetupProjectCommand($app['doctrine']->getManager()),
+        new App\Command\DropDatabaseCommand($app['config']['db']),
+        new App\Command\CreateDatabaseCommand($app['config']['db']),
+    ]);
+
+// Doctrine command
+$helperSet = new HelperSet(array(
+    'db' => new ConnectionHelper($app['doctrine']->getConnection()),
+    'em' => new EntityManagerHelper($app['doctrine']->getManager())
+));
+
+$console->setHelperSet($helperSet);
+
+// Migration command
+$app['migrations.namespace'] = 'App\Migrations';
+$app['migrations.path'] = __DIR__ . '/../src/App/Migrations';
+
+$app->register(new MigrationServiceProvider($console));
+
+ConsoleRunner::addCommands($console);
+
+$console->run();

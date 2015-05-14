@@ -1,0 +1,43 @@
+$amp: ".c-good-to-know";
+
+#{$amp} {
+    padding: 25px;
+    margin-bottom: 40px;
+    // background-color: $c-champagne;
+    background-color: hex-to-rgba($c-gamboge, .17);
+    border: 1px solid $c-gamboge;
+    position: relative;
+
+
+    &__close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        margin-left: 25px;
+        transform: scale(0.3, 0.3);
+        @include sprite($cross);
+        cursor: pointer;
+    }
+
+    &__title {
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 10px;
+        font-weight: $fw-bold;
+        color: $c-armadillo;
+    }
+
+    &__list {
+        font-size: 12px;
+        line-height: 20px;
+        color: $c-armadillo;
+        margin-bottom: 0;
+    }
+
+    &__item {
+        margin-bottom: 8px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
