@@ -18,6 +18,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RenderController
 {
+    public function mdClasses(Request $request, Application $app)
+    {
+        return new Response(implode(' ', $app['mobile_detect']->getHtmlClasses()));
+    }
+
     public function jsConfig(Request $request, Application $app, $transGroup = null)
     {
         $config = [

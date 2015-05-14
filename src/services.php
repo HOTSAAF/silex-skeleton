@@ -12,6 +12,7 @@ use App\Service\TranslatedStringExposerService;
 use App\Service\FormService;
 use App\Validator\Constraints\VerifiedReCaptchaValidator;
 use App\Service\UrlStoreService;
+use App\Service\MobileDetectService;
 
 // use App\Form\Extensions\ManagerRegistry;
 
@@ -80,8 +81,20 @@ $app['service.url_store'] = function() use ($app) {
     );
 };
 
-$app['mobile_detect'] = function() {
+$app['mobile_detect_lib'] = function() {
     return new \Mobile_Detect();
+};
+
+$app['mobile_detect'] = function() use ($app) {
+    return new MobileDetectService(
+        $app['mobile_detect_lib'],
+        [
+            'isMobile',
+            'isTablet',
+            'isiOS',
+            'isAndroidOS',
+        ]
+    );
 };
 
 $app['translator'] = $app->extend('translator', function($translator, $app) {
