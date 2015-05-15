@@ -49,9 +49,9 @@ $console->setDispatcher($app['dispatcher']);
             $rootPath . '/src/config/parameters.yml.dist',
             $ftp_config
         ),
-        new App\Command\SetupProjectCommand($app['doctrine']->getManager()),
         new App\Command\DropDatabaseCommand($app['config']['db']),
         new App\Command\CreateDatabaseCommand($app['config']['db']),
+        new App\Command\SetupProjectCommand($app['doctrine']->getManager()),
     ]);
 
 // Doctrine command
