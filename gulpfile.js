@@ -21,7 +21,14 @@ var Q          = require('q');
 var notifier   = require('node-notifier');
 console.timeEnd('requiring modules');
 
-var env = argv.env || 'dev';
+// Setting up environment
+var envs = ['dev', 'prod'];
+var env = argv.env || envs[0];
+if (envs.indexOf(env) === -1) {
+    throw 'The "' + env + '" environment is not supported in this gulpfile.';
+}
+
+// Utility classes
 function src(path) { return srcPath + '/' + path; }
 function dest(path) { return destPath + '/' + path; }
 
@@ -43,7 +50,7 @@ gulp.task('scripts', function() {
 
             browserify({
                 entries: srcArray[i],
-                debug: env == 'dev',
+                debug: env === 'dev',
                 paths: [src('bower_components')]
             })
             .bundle()
@@ -54,7 +61,7 @@ gulp.task('scripts', function() {
             .pipe(source(path.basename(srcArray[i])))
             .pipe(buffer())
             // Mangling sometimes screwed up the browserified modules.
-            .pipe(env == 'prod' ? $.uglify({mangle: false}) : $.util.noop())
+            .pipe($.if(env === 'prod', $.uglify({mangle: false})))
             .pipe(gulp.dest(dest(js_dest_dir)));
         }
 
@@ -74,15 +81,15 @@ gulp.task('scripts', function() {
 gulp.task('styles', function () {
     return gulp
         .src(src('styles/*.scss'))
-        .pipe(env == 'dev' ? $.sourcemaps.init() : $.util.noop())
+        .pipe($.if(env === 'dev', $.sourcemaps.init()))
         .pipe($.sass({
             includePaths: [src('bower_components')],
             imagePath: '../' + images_dest_dir
         }))
         .on('error', handleErrors)
         .pipe($.autoprefixer({browsers: ['> 1%']}))
-        .pipe(env == 'dev' ? $.sourcemaps.write() : $.util.noop())
-        .pipe(env == 'dev' ? $.util.noop() : $.csso())
+        .pipe($.if(env === 'dev', $.sourcemaps.write()))
+        .pipe($.if(env !== 'dev', $.csso()))
         .pipe(gulp.dest(dest(css_dest_dir)));
 });
 
@@ -157,7 +164,7 @@ gulp.task('watch', function() {
     });
 
     $.watch(dest('images/**/*'), function () {
-        // This triggers on deletions too, but hey, nothing's ever perfect. :)
+        //
         notifier.notify({
             'title': 'Reminder',
             'message': 'Don\'t forget to optimize the images you just added!'
