@@ -64,7 +64,7 @@ class SetupProjectCommand extends Command {
 
         // Dropping the database
         $application->run(
-            new StringInput('database:drop --force --if-exists'),
+            new StringInput('database:drop --force'),
             $output
         );
 
@@ -103,9 +103,6 @@ class SetupProjectCommand extends Command {
 
             $output->writeln('<info>Building the frontend assets via Gulp...</info>');
             exec('gulp build');
-
-            $output->writeln('<info>Installing Composer dependencies...</info>');
-            exec('composer install');
 
             $output->writeln('<info>Done building the project.</info>');
         }

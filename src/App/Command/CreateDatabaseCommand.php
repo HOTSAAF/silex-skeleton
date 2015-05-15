@@ -33,7 +33,7 @@ class CreateDatabaseCommand extends Command
         unset($this->config['dbname']);
 
         $connection = DriverManager::getConnection($this->config);
-        $shouldNotCreateDatabase = $ifNotExists && in_array($name, $connection->getSchemaManager()->listDatabases());
+        $shouldNotCreateDatabase = $ifNotExists || in_array($name, $connection->getSchemaManager()->listDatabases());
 
         $error = false;
 

@@ -54,7 +54,7 @@ class MigrationServiceProvider implements ServiceProviderInterface
 
 
         $helperSet = new HelperSet(array(
-            'connection' => new ConnectionHelper($container['db']),
+            'connection' => new ConnectionHelper($container['doctrine']->getConnection()),
             'dialog'     => new DialogHelper(),
         ));
 
@@ -78,12 +78,13 @@ class MigrationServiceProvider implements ServiceProviderInterface
         }
 
         // @codeCoverageIgnoreEnd
-        $configuration = new Configuration($container['db'], $container['doctrine.migrations.output_writer']);
+        $configuration = new Configuration($container['doctrine']->getConnection(), $container['doctrine.migrations.output_writer']);
         $configuration->setMigrationsDirectory($container['doctrine.migrations.path']);
         $configuration->setName($container['doctrine.migrations.name']);
         $configuration->setMigrationsNamespace($container['doctrine.migrations.namespace']);
         $configuration->setMigrationsTableName($container['doctrine.migrations.table_name']);
-        $configuration->registerMigrationsFromDirectory($container['doctrine.migrations.path']);
+        $configuration->setMigrationsDirectory($container['doctrine.migrations.path']);
+        // $configuration->registerMigrationsFromDirectory($container['doctrine.migrations.path']);
 
         foreach ($commands as $name) {
             $command = new $name();

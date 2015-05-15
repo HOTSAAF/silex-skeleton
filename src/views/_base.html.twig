@@ -9,19 +9,11 @@ class="
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
 
-        {% trans_default_domain 'meta' %}
-        <title>{% block title %}{{ 'base_title'|trans }}{% endblock %}</title>
-        <meta property="og:title" content="{% block og_title %}{{ 'base_title'|trans }}{% endblock %}">
-        <meta name="description" content="{% block description %}{{ 'default_description'|trans }}{% endblock %}">
-        <meta property="og:description" content="{% block og_description %}{{ 'default_description'|trans }}{% endblock %}">
-        <meta property="og:url" content="{{ request.schemeAndHttpHost ~ path(request.attributes.get('_route'), request.attributes.get('_route_params')) }}">
-        <meta property="og:type" content="website">
-        {% block meta_image %}
-            <meta property="og:image" content="{{ request.schemeAndHttpHost ~ (asset('images/share.jpg')) }}">
+        {% block meta %}
+            {% include 'includes/meta.html.twig' %}
         {% endblock %}
-        {% block meta %}{% endblock %}
 
-        {% include 'shared/favicons.html.twig' %}
+        {# {% include 'shared/favicons.html.twig' %} #}
 
         {# <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet'> #}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">

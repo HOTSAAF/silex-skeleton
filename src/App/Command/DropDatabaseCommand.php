@@ -37,7 +37,7 @@ class DropDatabaseCommand extends Command
 
         if ($input->getOption('force')) {
             $connection = DriverManager::getConnection($this->config);
-            $shouldDropDatabase = !$ifExists || in_array($name, $connection->getSchemaManager()->listDatabases());
+            $shouldDropDatabase = !$ifExists && in_array($name, $connection->getSchemaManager()->listDatabases());
 
             $error = false;
             try {
