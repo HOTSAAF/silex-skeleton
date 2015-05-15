@@ -1,0 +1,33 @@
+{% trans_default_domain 'meta' %}
+
+<title>
+    {% if title is defined %}
+        {{ title }}
+    {% else %}
+        {{
+            'base_title'|trans({
+                '%sub_title%': sub_title is defined ? sub_title : '',
+                '%sep%': 'title_separator'|trans,
+            })|trim(
+                'title_separator'|trans
+            )
+        }}
+    {% endif %}
+</title>
+<meta property="og:title" content="{{ og_title is defined ? og_title : 'base_title'|trans }}">
+<meta name="description" content="{{ description is defined ? description : 'default_description'|trans }}">
+<meta property="og:description" content="{{ og_description is defined ? og_description : 'default_description'|trans }}">
+<meta property="og:url" content="{{ request.schemeAndHttpHost ~ path(request.attributes.get('_route'), request.attributes.get('_route_params')) }}">
+<meta property="og:type" content="website">
+
+{% if
+    image_path is defined and
+    image_path|length
+%}
+    {% for image_url in image_path %}
+        <meta property="og:image" content="{{ request.schemeAndHttpHost ~ (asset(image_url)) }}">
+    {% endfor %}
+{% else %}
+    <meta property="og:image" content="{{ request.schemeAndHttpHost ~ (asset('images/share.jpg')) }}">
+{% endif %}
+

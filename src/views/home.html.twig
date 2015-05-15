@@ -1,5 +1,11 @@
 {% extends "_base.html.twig" %}
 
+{% block meta %}
+    {% include 'includes/meta.html.twig' with {
+        sub_title: 'home_title'|trans([], 'meta'),
+    } %}
+{% endblock %}
+
 {% block content %}
     Hey, I have some "Good To Know" facts:
     <ul>
