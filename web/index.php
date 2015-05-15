@@ -1,6 +1,6 @@
 <?php
 
-use App\Utils\AppUtility;
+use App\Util\AppUtility;
 
 ini_set('display_errors', 0);
 
