@@ -87,7 +87,7 @@ class DeployCommand extends Command
         }
 
         // Running deployment.
-        $output->writeln("<info>Running deployment to the \"$stage\" stage. (via `dg/ftp-deployment`)</info>");
+        $output->writeln("<info>Running deployment to the \"$stage\" stage. (with `dg/ftp-deployment`)</info>");
 
         $process = new Process("{$this->rootPath}/vendor/bin/deployment $stage_conf_path");
         $process->setTimeout(0);

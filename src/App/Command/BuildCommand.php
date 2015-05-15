@@ -108,7 +108,7 @@ class BuildCommand extends Command
         $this->output->writeln('<info>Installing bower components...</info>');
         exec('bower install');
 
-        $this->output->writeln('<info>Building the frontend assets via Gulp...</info>');
+        $this->output->writeln('<info>Building the frontend assets with Gulp...</info>');
         exec('gulp build --env=prod');
 
         $this->output->writeln('<info>Installing Composer dependencies...</info>');
