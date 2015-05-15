@@ -18,6 +18,7 @@ var sprite     = require('css-sprite').stream;
 var _          = require('lodash');
 var argv       = require('yargs').argv;
 var Q          = require('q');
+var notifier   = require('node-notifier');
 
 var env = argv.env || 'dev';
 function src(path) { return srcPath + '/' + path; }
@@ -127,23 +128,9 @@ gulp.task('sprites', function () {
     return buildDeferred.promise;
 });
 
-gulp.task('images', function () {
-    if (env === 'dev') {
-        return;
-    }
-
+gulp.task('optimize-images', function () {
     return gulp
-        .src(src('images/**/*'))
-        .pipe($.imagemin({
-            progressive: true,
-            interlaced: true
-        }))
-        .pipe(gulp.dest(dest(images_dest_dir)));
-});
-
-gulp.task('img', function () {
-    return gulp
-        .src(dest('img/**/*'))
+        .src(dest('images/**/*'))
         .pipe($.imagemin({
             progressive: true,
             interlaced: true
@@ -155,11 +142,21 @@ gulp.task('watch', function() {
     $.watch(src('styles/**/*.scss'), function () {
         gulp.start('styles');
     });
+
     $.watch(src('scripts/**/*.js'), function () {
         gulp.start('scripts');
     });
+
     $.watch(src('sprites/**/*.png'), function () {
         gulp.start('sprites');
+    });
+
+    $.watch(dest('images/**/*'), function () {
+        // This triggers on deletions too, but hey, nothing's ever perfect. :)
+        notifier.notify({
+            'title': 'Reminder',
+            'message': 'Don\'t forget to optimize the images you just added!'
+        });
     });
 });
 
