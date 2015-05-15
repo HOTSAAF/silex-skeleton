@@ -141,6 +141,16 @@ gulp.task('images', function () {
         .pipe(gulp.dest(dest(images_dest_dir)));
 });
 
+gulp.task('img', function () {
+    return gulp
+        .src(dest('img/**/*'))
+        .pipe($.imagemin({
+            progressive: true,
+            interlaced: true
+        }))
+        .pipe(gulp.dest(dest(images_dest_dir)));
+});
+
 gulp.task('watch', function() {
     $.watch(src('styles/**/*.scss'), function () {
         gulp.start('styles');
