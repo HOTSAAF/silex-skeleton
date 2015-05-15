@@ -29,7 +29,7 @@ class TransDownloadCommand extends Command
     protected function configure()
     {
         $this
-            ->setName("trans:download")
+            ->setName("app:trans:download")
             ->setDescription('Downloads the project\'s translation files from OneSky. It can optionally overwrite the existing local translations.')
             ->addOption(
                 'overwrite',
