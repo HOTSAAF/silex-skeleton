@@ -5,7 +5,8 @@
     "jquery": "~2.1.0",
     "modernizr": "~2.8.3",
     "foundation": "~5.5.0",
-    "sweetalert": "0.4.1"
+    "sweetalert": "0.4.1",
+    "fastclick": "~1.0.6"
   },
   "devDependencies": {
     "sass-mediaqueries": "~1.4.0",
@@ -24,8 +25,11 @@
       "main": [
         "css/foundation.css",
         "css/foundation.css.map",
-        "js/foundation.min.js"
+        "js/foundmodernizr.js"
       ]
+    },
+    "fastclick": {
+      "main": []
     }
   }
 }
