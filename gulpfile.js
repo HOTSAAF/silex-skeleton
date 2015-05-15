@@ -6,6 +6,7 @@ var css_dest_dir         = 'css';
 var images_dest_dir      = 'images';
 var gulp_bower_dest_dir  = 'bower';
 
+console.time('requiring modules');
 var gulp       = require('gulp');
 var $          = require('gulp-load-plugins')();
 var glob       = require('glob');
@@ -15,10 +16,10 @@ var source     = require('vinyl-source-stream');
 var buffer     = require('vinyl-buffer');
 var bower      = require('main-bower-files');
 var sprite     = require('css-sprite').stream;
-var _          = require('lodash');
 var argv       = require('yargs').argv;
 var Q          = require('q');
 var notifier   = require('node-notifier');
+console.timeEnd('requiring modules');
 
 var env = argv.env || 'dev';
 function src(path) { return srcPath + '/' + path; }
@@ -33,12 +34,15 @@ gulp.task('bower', function() {
 gulp.task('scripts', function() {
     var arrayBundle = function(srcArray) {
         var deferredPromises = [];
-        _.each(srcArray, function(sourcePath) {
-            var deferred = Q.defer();
+
+        var srcArrayLength = srcArray.length;
+        var deferred = null;
+        for (var i = srcArrayLength - 1; i >= 0; i--) {
+            deferred = Q.defer();
             deferredPromises.push(deferred.promise);
 
             browserify({
-                entries: sourcePath,
+                entries: srcArray[i],
                 debug: env == 'dev',
                 paths: [src('bower_components')]
             })
@@ -47,12 +51,12 @@ gulp.task('scripts', function() {
             .on('end', (function(deferred) {
                 deferred.resolve();
             }.bind(this, deferred)))
-            .pipe(source(path.basename(sourcePath)))
+            .pipe(source(path.basename(srcArray[i])))
             .pipe(buffer())
             // Mangling sometimes screwed up the browserified modules.
             .pipe(env == 'prod' ? $.uglify({mangle: false}) : $.util.noop())
             .pipe(gulp.dest(dest(js_dest_dir)));
-        });
+        }
 
         return deferredPromises;
     };
@@ -104,7 +108,7 @@ gulp.task('sprites', function () {
             .pipe(sprite(conf))
             .pipe($.if(
                 '*.png',
-                gulp.dest(src(images_dest_dir + '/sprites')).on('end', function() {deferred.resolve();}),
+                gulp.dest(dest(images_dest_dir + '/sprites')).on('end', function() {deferred.resolve();}),
                 gulp.dest(src('styles/sprites/')).on('end', function() {deferred.resolve();})
             ));
 
@@ -114,11 +118,12 @@ gulp.task('sprites', function () {
     var buildDeferred = Q.defer();
     glob(src('sprites/*/'), {}, function(er, folders) {
         var deferredPromises = [];
-        _.each(folders, function(folderPath) {
-            var spriteName = path.basename(folderPath);
-            deferredPromises.push(runSpriteBuild(folderPath, spriteName, 'css'));
-            deferredPromises.push(runSpriteBuild(folderPath, spriteName, 'scss'));
-        });
+        var foldersLength = folders.length;
+        for (var i = foldersLength - 1; i >= 0; i--) {
+            var spriteName = path.basename(folders[i]);
+            deferredPromises.push(runSpriteBuild(folders[i], spriteName, 'css'));
+            deferredPromises.push(runSpriteBuild(folders[i], spriteName, 'scss'));
+        };
 
         Q.all(deferredPromises).then(function() {
             buildDeferred.resolve();
