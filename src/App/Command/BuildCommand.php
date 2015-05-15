@@ -103,7 +103,7 @@ class BuildCommand extends Command
         $this->updateAssetVersions();
 
         $this->output->writeln('<info>Installing npm modules...</info>');
-        exec('npm install --silent --production');
+        exec('npm install --production');
 
         $this->output->writeln('<info>Installing bower components...</info>');
         exec('bower install');
