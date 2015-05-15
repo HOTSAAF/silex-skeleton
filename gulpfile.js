@@ -160,8 +160,6 @@ gulp.task('watch', function() {
     });
 });
 
-gulp.task('build', ['bower', 'scripts', 'sprites', 'images'], function() {
-    gulp.start('styles');
-});
+gulp.task('build', ['scripts', 'styles']);
 
 gulp.task('default', ['build']);
