@@ -3,8 +3,26 @@
 
     RewriteEngine On
 
-    # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-    # RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+    # Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+    # Determine the RewriteBase automatically and set it as environment variable.
+    # If you are using Apache aliases to do mass virtual hosting or installed the
+    # project in a subdirectory, the base path will be prepended to allow proper
+    # resolution of the app.php file and to redirect to the correct URI. It will
+    # work in environments without path prefix as well, providing a safe, one-size
+    # fits all solution. But as you do not need it in this case, you can comment
+    # the following 2 lines to eliminate the overhead.
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+
+    # Maintenance mode
+    RewriteCond %{REMOTE_ADDR} !^31\.46\.77\.11
+    RewriteCond %{DOCUMENT_ROOT}/%{ENV:BASE}/maintenance/index.php -f
+    RewriteCond %{DOCUMENT_ROOT}/%{ENV:BASE}/../maintenance.on -f
+    RewriteCond %{SCRIPT_FILENAME} !maintenance/index.php
+    RewriteRule ^(.*)$ %{ENV:BASE}/maintenance/index.php?type=html [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
