@@ -1,5 +1,5 @@
-// var gulp_notify = require('gulp-notify');
-var argv        = require('yargs').argv;
+'use strict';
+var argv = require('yargs').argv;
 
 module.exports = {
     env:           argv.env || 'dev',
