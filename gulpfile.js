@@ -28,17 +28,17 @@ gulp.task('bower', function() {
 });
 
 gulp.task('scripts', function() {
-    var arrayBundle = function(srcArray) {
+    var browserifyFiles = function(filesArray) {
         var deferredPromises = [];
 
-        var srcArrayLength = srcArray.length;
+        var filesArrayLength = filesArray.length;
         var deferred = null;
-        for (var i = srcArrayLength - 1; i >= 0; i--) {
+        for (var i = filesArrayLength - 1; i >= 0; i--) {
             deferred = Q.defer();
             deferredPromises.push(deferred.promise);
 
             browserify({
-                entries: srcArray[i],
+                entries: filesArray[i],
                 debug: util.env === 'dev',
                 paths: [util.src('bower_components')]
             })
@@ -47,7 +47,7 @@ gulp.task('scripts', function() {
             .on('end', (function(deferred) {
                 deferred.resolve();
             }.bind(this, deferred)))
-            .pipe(source(path.basename(srcArray[i])))
+            .pipe(source(path.basename(filesArray[i])))
             .pipe(buffer())
             // Mangling sometimes screwed up the browserified modules.
             .pipe($.if(util.env === 'prod', $.uglify({mangle: false})))
@@ -58,8 +58,8 @@ gulp.task('scripts', function() {
     };
 
     var bundleDeferred = Q.defer();
-    glob(util.src('scripts/*.js'), {}, function(er, files) {
-        Q.all(arrayBundle(files)).then(function() {
+    glob(util.src('scripts/*.js'), {}, function(er, filesArray) {
+        Q.all(browserifyFiles(filesArray)).then(function() {
             bundleDeferred.resolve();
         });
     });
@@ -84,7 +84,7 @@ gulp.task('styles', function () {
 
 
 gulp.task('sprites', function () {
-    var runSpriteBuild = function(folderPath, spriteName, processor) {
+    var generateSprites = function(folderPath, spriteName, processor) {
         var conf = {
             name: spriteName,
             style: spriteName + '-' + processor + '.scss',
@@ -117,8 +117,8 @@ gulp.task('sprites', function () {
         var foldersLength = folders.length;
         for (var i = foldersLength - 1; i >= 0; i--) {
             var spriteName = path.basename(folders[i]);
-            deferredPromises.push(runSpriteBuild(folders[i], spriteName, 'css'));
-            deferredPromises.push(runSpriteBuild(folders[i], spriteName, 'scss'));
+            deferredPromises.push(generateSprites(folders[i], spriteName, 'css'));
+            deferredPromises.push(generateSprites(folders[i], spriteName, 'scss'));
         };
 
         Q.all(deferredPromises).then(function() {
