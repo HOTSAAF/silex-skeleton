@@ -4,16 +4,20 @@
   "dependencies": {
     "browserify": "^6.3.3",
     "browserify-shim": "~3.8.2",
-    "q": "^1.3.0",
-    "gulp": "^3.8.8",
+    "del": "^1.1.1",
     "glob": "^3.2.9",
+    "gulp": "^3.8.8",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-csso": "^0.2.9",
+    "gulp-if": "^1.2.5",
+    "gulp-load-plugins": "^0.7.1",
     "gulp-sass": "^1.0.0",
     "gulp-sourcemaps": "^1.2.2",
     "gulp-uglify": "^1.0.1",
-    "gulp-if": "^1.2.5",
-    "gulp-csso": "^0.2.9",
-    "gulp-autoprefixer": "^2.0.0",
-    "gulp-load-plugins": "^0.7.1",
+    "gulp-util": "^3.0.4",
+    "merge-stream": "^0.1.7",
+    "q": "^1.3.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "yargs": "^2.3.0"
@@ -23,7 +27,6 @@
     "gulp-imagemin": "^2.0.0",
     "gulp-notify": "^2.0.0",
     "gulp-watch": "^4.1.0",
-    "main-bower-files": "^2.0.0",
     "node-notifier": "^4.2.1"
   },
   "engines": {
@@ -39,12 +42,5 @@
     "jquery": "global:$",
     "modernizr": "global:Modernizr",
     "grecaptcha": "global:grecaptcha"
-  },
-  "//": {
-    "browserify shim examples": {
-      "sweet-alert": "global:swal",
-      "ckeditor": "global:CKEDITOR",
-      "angular": "global:angular"
-    }
   }
 }

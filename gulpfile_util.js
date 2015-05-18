@@ -11,7 +11,42 @@ module.exports = {
     jsDestDir:     'js',
     cssDestDir:    'css',
     imagesDestDir: 'images',
-    bowerDestDir:  'bower',
+
+    getScriptsConfiguration: function() {
+        return {
+            'script.js': [
+                this.src('bower_components/modernizr/modernizr.js'),
+                this.src('bower_components/foundation/js/foundation.min.js'),
+                this.src('bower_components/sweetalert/lib/sweet-alert.js')
+            ],
+            'admin.js': [
+                this.src('bower_components/modernizr/modernizr.js')
+            ],
+            'jquery.js': [
+                this.src('bower_components/jquery/dist/jquery.min.js')
+            ]
+        };
+    },
+
+    getStylesConfiguration: function() {
+        return {
+            'style.css': [
+                this.src('bower_components/normalize-scss/normalize.css')
+            ]
+        };
+    },
+
+    getCopyConfiguration: function() {
+        return [];
+
+        // Example
+        return [
+            {
+                src: this.src('bower_components/bourbon/**/*'),
+                dest: this.dest('bower/bourbon')
+            }
+        ];
+    },
 
     src: function(path) {
         return this.srcPath + '/' + path;

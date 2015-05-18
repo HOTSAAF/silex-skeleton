@@ -14,22 +14,5 @@
     "bourbon": "~3.1.8",
     "clam": "0.4.1-alpha",
     "q": "~1.0"
-  },
-  "overrides": {
-    "modernizr": {
-      "main": [
-        "modernizr.js"
-      ]
-    },
-    "foundation": {
-      "main": [
-        "css/foundation.css",
-        "css/foundation.css.map",
-        "js/foundmodernizr.js"
-      ]
-    },
-    "fastclick": {
-      "main": []
-    }
   }
 }
