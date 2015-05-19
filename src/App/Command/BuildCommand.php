@@ -103,6 +103,11 @@ class BuildCommand extends Command
         $this->updateAssetVersions();
 
         $this->output->writeln('<info>Installing npm modules...</info>');
+        // Create a symlink, so that npm installation uses the same node_modules
+        // folder each time
+        if (!is_link('node_modules')) {
+            symlink($this->rootPath . '/node_modules', 'node_modules');
+        }
         exec('npm install --production');
 
         $this->output->writeln('<info>Installing bower components...</info>');
