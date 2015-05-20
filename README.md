@@ -1,3 +1,6 @@
+# Silex Skeleton Project
+[![Project Status](http://stillmaintained.com/ZeeCoder/silex-skeleton.png)](http://stillmaintained.com/ZeeCoder/silex-skeleton)
+
 ## Needed documentation
  - onesky command documentation
  - include a list of features in this skeleton
