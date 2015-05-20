@@ -16,9 +16,9 @@ mail:
     swift_use_spool: %swift_use_spool% # Look in the ApiController for explanation
 
 app:
-    name: %app_name% # Used by monolog
+    name: silex-skeleton # Used by monolog
     maintenance: %maintenance%
-    contact_form_target: %contact_form_target%
+    contact_form_target: ~
     # To obtain Google reCAPTCHA keys, register a new site as "localhost" on
     # https://www.google.com/recaptcha
     recaptcha:
@@ -29,15 +29,20 @@ app:
 
 monolog:
     slack_handler:
-        token: %xoxb-4605888119-NmB6S0W4LrxkQnXOVLAxgsdH%
-        channel: %monolog_slack_handler_channel%
+        token: ~
+        channel: ~
     # Only needed if the SwiftMailer Handler is added to the monolog logger
     # swift_mailer_handler:
     #     critical_error_notification_to: error@zalehy.com
 
+deployment:
+    slack:
+        token: ~
+        channel: ~
+
 # Configurations declared here are registered in the app container under the
 # "config" key. Ex: "mainenance" is available via: `$app['config']['maintenance']`.
-google_analytics_id: %google_analytics_id%
+google_analytics_id: ~
 
 # Available versions for the "/api/{v}" routes.
 # The last entry counts as the latest API version, which is used in the
@@ -54,9 +59,9 @@ locales:
     - hu
 
 one_sky_helper:
-    api_key: %one_sky_api_key%
-    api_secret: %one_sky_api_secret%
-    project_id: %one_sky_project_id%
+    api_key: ~
+    api_secret: ~
+    project_id: ~
 
 trans_download_command:
     # This path is relative to the project's root dir.
@@ -68,10 +73,8 @@ trans_download_command:
 # Specific configuration for the zeecoder/mailchimp-handler Helper.php
 # constructor
 mailchimp_helper:
-    secret_api: %mailchimp_secret_api%
+    secret_api: ~
 
 # App-specific mailchimp configurations
 mailchimp:
-    list_id: %mailchimp_list_id%
-
-
+    list_id: ~

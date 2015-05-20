@@ -52,6 +52,7 @@ $console->setDispatcher($app['dispatcher']);
         new App\Command\MaintenanceOnCommand($ftp_config),
         new App\Command\MaintenanceOffCommand($ftp_config),
         new App\Command\SetupProjectCommand($app['doctrine']->getManager()),
+        new App\Command\SlackNotifCommand($app['config']['deployment']['slack']),
     ]);
 
 // Doctrine command
