@@ -15,6 +15,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class DeployCommand extends Command
 {
+    private $ftpConfig;
     private $rootPath;
     private $configPath;
     private $availableStages;
@@ -28,8 +29,8 @@ class DeployCommand extends Command
         $this->defaultStage = $defaultStage;
 
         // Getting the available stages from deployment configurations.
-        $ftpConfig = require $configPath . '/ftp_config.php';
-        $this->availableStages = array_keys($ftpConfig);
+        $this->ftpConfig = require $configPath . '/ftp_config.php';
+        $this->availableStages = array_keys($this->ftpConfig);
 
         if ($this->defaultStage === null) {
             $this->defaultStage = $this->availableStages[0];
@@ -100,5 +101,14 @@ class DeployCommand extends Command
                 $output->writeln("$buffer");
             }
         });
+
+        // Push notification via slack about the deployment
+        $command = $this->getApplication()->find('app:slack:notif');
+        $localInput = new ArrayInput([
+            'command' => 'app:slack:notif',
+            '--text' => 'Deployment to the host "' . $this->ftpConfig[$stage]['host']. '" was successful.',
+        ]);
+        $localOutput = new ConsoleOutput();
+        $command->run($localInput, $localOutput);
     }
 }
