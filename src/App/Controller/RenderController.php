@@ -52,7 +52,7 @@ class RenderController
 
     public function adminGoodToKnow(Request $request, Application $app)
     {
-        $tips = $app['service.good_to_know']->getGoodToKnowCollection($app['request_stack']->getMasterRequest()->attributes->get('_route'));
+        $tips = $app['service.good_to_know']->getAllByGroup($app['request_stack']->getMasterRequest()->attributes->get('_route'));
 
         return $app['twig']->render('admin/includes/_good_to_know.html.twig', array(
             'tips' => $tips,

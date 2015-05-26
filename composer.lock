@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9802b00f4cbe6e52752a0c43e7838faf",
+    "hash": "49ffae71597cc0ed20d3ac7d5e5a623a",
     "packages": [
         {
             "name": "dflydev/doctrine-orm-service-provider",
@@ -1317,7 +1317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/306eea949c53571509c31ec2ba861c8b9e2d2062",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/bdbf5b78181dbfd2cf41d100e0866d385b151638",
                 "reference": "3d4cf2fed13968ec300e24531f8ed0d8740c33b3",
                 "shasum": ""
             },
@@ -1405,7 +1405,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/103209be88501fc795ae451ed32d9f5944b7dece",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/bf7dec2b38cf7fbda95df90caecc1885cbcd65b8",
                 "reference": "103209be88501fc795ae451ed32d9f5944b7dece",
                 "shasum": ""
             },
@@ -3234,6 +3234,42 @@
             "time": "2015-04-19 08:30:27"
         },
         {
+            "name": "zeecoder/good-to-know",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ZeeCoder/good-to-know.git",
+                "reference": "1780a1d708dbaa8cf235e7249911e3179dd88c30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ZeeCoder/good-to-know/zipball/1780a1d708dbaa8cf235e7249911e3179dd88c30",
+                "reference": "1780a1d708dbaa8cf235e7249911e3179dd88c30",
+                "shasum": ""
+            },
+            "require-dev": {
+                "symfony/translation": "^2.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZeeCoder\\GoodToKnow\\": "src/ZeeCoder/GoodToKnow/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hubert Viktor",
+                    "email": "rpgmorpheus@gmail.com"
+                }
+            ],
+            "description": "A solution for collecting good-to-know facts to show to users.",
+            "time": "2015-05-25 17:27:04"
+        },
+        {
             "name": "zeecoder/mailchimp-helper",
             "version": "dev-master",
             "source": {
@@ -3243,7 +3279,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZeeCoder/mailchimp-helper/zipball/55c21fdf8cde1b8ec9c5baad40c6554ae4c7c2b9",
+                "url": "https://api.github.com/repos/ZeeCoder/mailchimp-helper/zipball/ca0ef39de80ff50d23398def197116f3b564105a",
                 "reference": "0a258073c5f1b4a5495953f39320aa5608002f25",
                 "shasum": ""
             },
@@ -3363,7 +3399,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZeeCoder/onesky-helper/zipball/44143060e51bdd60a9f9f1a3f196c90a9b20ca48",
+                "url": "https://api.github.com/repos/ZeeCoder/onesky-helper/zipball/bcac7e660f2863c4f9b8e4cc49b604cc3f23c369",
                 "reference": "44143060e51bdd60a9f9f1a3f196c90a9b20ca48",
                 "shasum": ""
             },

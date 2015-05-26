@@ -4,6 +4,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Yaml\Yaml;
 
 use App\Service\ApiService;
 use App\Service\GoodToKnowService;
@@ -19,6 +20,7 @@ use App\Service\MaintenanceService;
 
 use Saxulum\DoctrineOrmManagerRegistry\Doctrine\ManagerRegistry;
 use ZeeCoder\MailChimp\Helper as MailChimpHelper;
+use ZeeCoder\GoodToKnow\GoodToKnow;
 
 // $app['form.extensions'] = $app->extend('form.extensions', function ($extensions) use ($app) {
 //     // $managerRegistry = new ManagerRegistry(null, array(), array('orm.em'), null, null, $app['orm.proxies_namespace']);
@@ -59,11 +61,20 @@ $app['service.mailchimp'] = function() use ($app) {
 };
 
 $app['service.good_to_know'] = function() use ($app) {
-    return new GoodToKnowService(
-        __DIR__ . '/config/good_to_know.yml',
-        $app['translator'],
-        $app['request_stack']
+    $goodToKnow = new GoodToKnow(
+        Yaml::parse(file_get_contents(__DIR__ . '/config/good_to_know.yml'))
     );
+
+    $goodToKnow->addTranslator($app['translator']);
+
+    $goodToKnow->addParameter('%upload_max_filesize%', function() {
+        return ini_get('upload_max_filesize');
+    });
+    $goodToKnow->addParameter('%consectetur%', function() {
+        return 'consectetur';
+    });
+
+    return $goodToKnow;
 };
 
 $app['service.maintenance'] = function() use ($app) {

@@ -18,7 +18,7 @@ class HomeController
     {
         return $app['twig']->render('home.html.twig', [
             'contact_form' => $app['service.form']->getContactForm()->createView(),
-            'good_to_know' => $app['service.good_to_know']->getGoodToKnowCollection('non_admin'),
+            'good_to_know' => $app['service.good_to_know']->getAllByGroup('non_admin'),
         ]);
     }
 }
