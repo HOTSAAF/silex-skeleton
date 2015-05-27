@@ -3235,16 +3235,16 @@
         },
         {
             "name": "zeecoder/good-to-know",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZeeCoder/good-to-know.git",
-                "reference": "1780a1d708dbaa8cf235e7249911e3179dd88c30"
+                "reference": "0c9128e77e0072bf602f3a43c7ba160a45d3cbce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZeeCoder/good-to-know/zipball/1780a1d708dbaa8cf235e7249911e3179dd88c30",
-                "reference": "1780a1d708dbaa8cf235e7249911e3179dd88c30",
+                "url": "https://api.github.com/repos/ZeeCoder/good-to-know/zipball/0c9128e77e0072bf602f3a43c7ba160a45d3cbce",
+                "reference": "0c9128e77e0072bf602f3a43c7ba160a45d3cbce",
                 "shasum": ""
             },
             "require-dev": {
@@ -3267,7 +3267,7 @@
                 }
             ],
             "description": "A solution for collecting good-to-know facts to show to users.",
-            "time": "2015-05-25 17:27:04"
+            "time": "2015-05-27 19:45:17"
         },
         {
             "name": "zeecoder/mailchimp-helper",
