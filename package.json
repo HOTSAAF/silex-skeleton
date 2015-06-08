@@ -27,7 +27,8 @@
     "gulp-imagemin": "^2.0.0",
     "gulp-notify": "^2.0.0",
     "gulp-watch": "^4.1.0",
-    "node-notifier": "^4.2.1"
+    "node-notifier": "^4.2.1",
+    "z-trans": "^1.0.0"
   },
   "engines": {
     "node": ">=0.11.0"

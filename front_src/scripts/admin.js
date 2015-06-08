@@ -4,13 +4,12 @@ var cutil = require('clam/core/util');
 cutil.notation.module.prefix = 'jsc-'; // Clam uses the 'jsm' prefix by default.
 // var module = require('./clam_module/module');
 
-
 // var $ = require('jquery');
 var app_util = require('./module/util');
 var shame = require('./module/shame');
 var global = require('./module/global');
 var config_loader = require('./module/config_loader');
-var trans = require('./module/trans');
+var trans_configurator = require('./module/trans_configurator');
 
 var swal = require('./clam_module/swal');
 var block_hider = require('./clam_module/block_hider');
@@ -23,7 +22,7 @@ cutil.createPrototypes(block_hider);
 config_loader.load();
 
 app_util.init();
-trans.init();
+trans_configurator.config();
 
 global.init();
 shame.init();

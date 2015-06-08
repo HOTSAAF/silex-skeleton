@@ -20,7 +20,9 @@ module.exports = {
                 this.src('bower_components/sweetalert/lib/sweet-alert.js')
             ],
             'admin.js': [
-                this.src('bower_components/modernizr/modernizr.js')
+                this.src('bower_components/modernizr/modernizr.js'),
+                this.src('bower_components/foundation/js/foundation.min.js'),
+                this.src('bower_components/sweetalert/lib/sweet-alert.js')
             ],
             'jquery.js': [
                 this.src('bower_components/jquery/dist/jquery.min.js')
@@ -31,7 +33,8 @@ module.exports = {
     getStylesConfiguration: function() {
         return {
             'style.css': [
-                this.src('bower_components/normalize-scss/normalize.css')
+                this.src('bower_components/normalize-scss/normalize.css'),
+                this.src('bower_components/sweetalert/lib/sweet-alert.css')
             ]
         };
     },

@@ -8,7 +8,7 @@ var $ = require('jquery');
 var q = require('q');
 // var clam_container = require('clam/core/container');
 var app_util = require('./util');
-var trans = require('./trans');
+var trans = require('z-trans');
 
 module.exports = {
     getPromise: function(apiUrlPath, jQueryConfig, apiVersion) {

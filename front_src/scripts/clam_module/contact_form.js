@@ -5,7 +5,7 @@ var clam_module = require('clam/core/module');
 // var $ = require('jquery');
 var inherits = require('util').inherits;
 var api_ajax = require('../module/api_ajax');
-var trans = require('../module/trans');
+var trans = require('z-trans');
 var grecaptcha = require('grecaptcha');
 var config_loader = require('../module/config_loader');
 

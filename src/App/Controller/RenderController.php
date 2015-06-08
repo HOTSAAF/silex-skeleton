@@ -42,6 +42,9 @@ class RenderController
                 'current_api_version' => $app['config']['api_versions'][count($app['config']['api_versions']) - 1],
             ],
             'trans' => $app['service.translator_string_exposer']->getExposedCollection($transGroup),
+            'ztrans' => [
+                $request->getLocale() => $app['service.translator_string_exposer']->getExposedCollection($transGroup),
+            ],
             'contact_form' => [
                 'recaptcha_site_key' => $app['config']['app']['recaptcha']['site_key'],
             ],
