@@ -13,4 +13,11 @@
             <li>{{ fact }}</li>
         {% endfor %}
     </ul>
+
+    <h2>File validation test</h2>
+    <input type="file" class="js-file-validator" data-js-file-validator='{
+        "max_size": "5Mb",
+        "accept": "image/*"
+    }'>
+    <span class="js-file-validator__label"></span>
 {% endblock %}

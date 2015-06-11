@@ -10,7 +10,5 @@ module.exports = {
         }
         trans.defaultLocale = 'en'; // Fallback locale
         trans.locale = 'en'; // Current locale
-
-        window.trans = trans;
     }
 };

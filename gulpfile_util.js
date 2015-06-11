@@ -34,6 +34,9 @@ module.exports = {
         return {
             'style.css': [
                 this.src('bower_components/normalize-scss/normalize.css'),
+            ],
+            'admin.css': [
+                this.src('bower_components/normalize-scss/normalize.css'),
                 this.src('bower_components/sweetalert/lib/sweet-alert.css')
             ]
         };

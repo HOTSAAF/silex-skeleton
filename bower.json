@@ -10,7 +10,6 @@
     "sass-mediaqueries": "~1.4.0",
     "normalize-scss": "~3.0.2",
     "bourbon": "~3.1.8",
-    "clam": "0.4.1-alpha",
     "q": "~1.0"
   }
 }
