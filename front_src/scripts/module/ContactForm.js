@@ -2,7 +2,7 @@
 var api_ajax = require('../module/api_ajax');
 var trans = require('z-trans');
 var grecaptcha = require('grecaptcha');
-var config_loader = require('../module/config_loader');
+var data_loader = require('../module/data_loader');
 var HookFinder = require('z-hook-finder');
 var Lock = require('z-lock');
 var Namespacer = require('z-namespacer');
@@ -10,7 +10,7 @@ var Namespacer = require('z-namespacer');
 function ContactForm($object) {
     var self = this;
 
-    this.config = config_loader.get('contact_form');
+    this.exposedData = data_loader.get('contact_form');
 
     this.$object = $object;
     this.moduleName = 'contact-form';
@@ -26,13 +26,13 @@ function ContactForm($object) {
     // Initializing reCAPTCHA widget.
     // We must render it manually, so that we can save the created widget, which
     // can used later as the "opt_widget_id" for resetting.
-    if (!this.config.recaptcha_site_key) {
+    if (!this.exposedData.recaptcha_site_key) {
         console.error('Missing reCaptcha site key.');
     } else {
         this.reCaptchaWidget = grecaptcha.render(
             this.finder.find('recaptcha', 1)[0],
             {
-                sitekey: this.config.recaptcha_site_key
+                sitekey: this.exposedData.recaptcha_site_key
             }
         );
     }

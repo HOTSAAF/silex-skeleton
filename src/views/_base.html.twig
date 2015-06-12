@@ -54,7 +54,7 @@ class="
             {% include 'shared/footer.html.twig' %}
         {% endblock %}
 
-        {{ render(controller('App\\Controller\\RenderController::jsConfig')) }}
+        {{ render(controller('App\\Controller\\RenderController::exposeDataToClient')) }}
 
         {% include 'includes/cdn_asset.html.twig' with {
             remote_url: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
