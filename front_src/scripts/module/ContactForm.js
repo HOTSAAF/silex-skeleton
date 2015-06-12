@@ -5,6 +5,7 @@ var grecaptcha = require('grecaptcha');
 var config_loader = require('../module/config_loader');
 var HookFinder = require('z-hook-finder');
 var Lock = require('z-lock');
+var Namespacer = require('z-namespacer');
 
 function ContactForm($object) {
     var self = this;
@@ -15,9 +16,10 @@ function ContactForm($object) {
     this.moduleName = 'contact-form';
     this.finder = new HookFinder(this.$object, 'js-' + this.moduleName + '__');
     this.animationLock = new Lock();
+    this.ns = new Namespacer(this.moduleName);
 
     this.$form = this.$object.find('form');
-    this.$form.on('submit', this.onFormSubmit.bind(this));
+    this.$form.on(this.ns.get('submit'), this.onFormSubmit.bind(this));
 
     this.$inputs = this.$form.find('[name]').addBack('[name]');
 

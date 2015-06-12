@@ -4,6 +4,7 @@ var mobiledetect = require('./mobiledetect');
 var modernizr = require('modernizr');
 var dom_config = require('z-dom-config');
 var HookFinder = require('z-hook-finder');
+var Namespacer = require('z-namespacer');
 
 function Parallax($object) {
     if (mobiledetect.detect('isMobile')) {
@@ -13,12 +14,13 @@ function Parallax($object) {
     this.moduleName = 'parallax';
     this.$object = $object;
     this.finder = new HookFinder(this.$object, 'js-' + this.moduleName + '__');
+    this.ns = new Namespacer(this.moduleName);
 
     this.prefixedTransform = modernizr.prefixed('transform');
     this.$window = $(window);
     this.cachedTransitions = {};
 
-    this.$window.on('scroll', this.adjustPositions.bind(this));
+    this.$window.on(this.ns.get('scroll'), this.adjustPositions.bind(this));
 
     this.adjustPositions();
 }

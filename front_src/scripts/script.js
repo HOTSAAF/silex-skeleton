@@ -21,16 +21,18 @@ $('.js-contact-form').each(function() {
 });
 
 var FileValidator = require('z-file-validator');
-$('.js-file-validator').each(function() {
-    new FileValidator($(this), 'js-file-validator', function(validationCode, file, config) {
+new FileValidator(
+    $('.js-contact-form .js-file-validator'),
+    'js-file-validator',
+    function(validationCode, file, config) {
         if (validationCode === true) {
             // The input file is valid, so let's show the file's name in the label element
             validationCode = file.name;
         }
 
         $(this).next().text(validationCode);
-    });
-});
+    }
+);
 
 trans_configurator.config();
 app_util.init();
