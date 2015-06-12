@@ -1,10 +1,10 @@
 var trans = require('z-trans');
-var config_loader = require('./config_loader');
+var data_loader = require('./data_loader');
 
 module.exports = {
     config: function() {
         // Initializing the trans module
-        var transData = config_loader.get('ztrans');
+        var transData = data_loader.get('ztrans');
         for (var locale in transData) {
             trans.addData(locale, transData[locale]);
         }

@@ -29,10 +29,12 @@
     "gulp-notify": "^2.0.0",
     "gulp-watch": "^4.1.0",
     "node-notifier": "^4.2.1",
+    "z-container": "^1.0.1",
     "z-dom-config": "^0.1.0",
     "z-file-validator": "^0.1.0",
     "z-hook-finder": "^0.1.1",
     "z-lock": "^1.0.0",
+    "z-namespacer": "^1.0.0",
     "z-trans": "^1.0.0"
   },
   "engines": {

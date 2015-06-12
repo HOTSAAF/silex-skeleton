@@ -30,7 +30,7 @@ class RenderController
         ]);
     }
 
-    public function jsConfig(Request $request, Application $app, $transGroup = null)
+    public function exposeDataToClient(Request $request, Application $app, $transGroup = null)
     {
         $config = [
             'util' => [
@@ -50,7 +50,7 @@ class RenderController
             ],
         ];
 
-        return new Response('<script id="js-config-loader" type="config/json">' . json_encode($config) . '</script>');
+        return new Response('<script id="js-data-loader" type="exposed-data/json">' . json_encode($config) . '</script>');
     }
 
     public function adminGoodToKnow(Request $request, Application $app)

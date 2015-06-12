@@ -1,16 +1,16 @@
 'use strict';
 // var $ = require('jquery');
-var config_loader = require('./config_loader');
+var data_loader = require('./data_loader');
 
 module.exports = {
-    config: {},
+    exposedData: {},
 
     init: function() {
-        this.config = config_loader.get('util');
+        this.exposedData = data_loader.get('util');
     },
 
     get: function(key) {
-        return this.config[key];
+        return this.exposedData[key];
     },
 
     url: function(relativePath) {

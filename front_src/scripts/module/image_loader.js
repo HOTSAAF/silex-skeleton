@@ -4,13 +4,13 @@ var q = require('q');
 
 module.exports = {
     /**
-     * "data" can be a string, a jQuery object, or an array having elements of
-     * the two previously mentioned types.
+     * string|jQuery|Array data Url string or strings, or a jQuery object
+     * containing `img` elements.
      */
     getPromise: function(data) {
         var self = this;
 
-        // Converting a single element to an array for consistency
+        // Converting a single element to an array for consistency.
         if (Array.isArray(data) === false) {
             data = [data];
         }
@@ -39,7 +39,7 @@ module.exports = {
     },
 
     /**
-     * The "img" parameter can be a string representing the image url, or an
+     * string|DOMElement img Can be a string representing the image url, or an
      * Image DOM element.
      */
     createPromiseForImg: function(img) {
@@ -65,7 +65,7 @@ module.exports = {
             img.src = imgSrc;
         }
 
-        // Cached images will immediately resolve the promise
+        // Cached images immediately resolve their promises.
         if (img.complete) {
             d.resolve(img);
         }
