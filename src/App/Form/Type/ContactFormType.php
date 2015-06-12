@@ -81,7 +81,7 @@ class ContactFormType extends AbstractType
             // Adding custom field type
             ->add('recaptcha_response', new ReCaptchaFieldType(), [
                 'attr' => [
-                    'class' => 'jsc-contact-form__recaptcha',
+                    'class' => 'js-contact-form__recaptcha',
                 ],
                 'constraints' => [
                     // Adding custom constraint

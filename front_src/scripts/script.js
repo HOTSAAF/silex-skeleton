@@ -1,28 +1,37 @@
 'use strict';
 
-var cutil = require('clam/core/util');
-cutil.notation.module.prefix = 'jsc-'; // Clam uses the 'jsm' prefix by default.
-
-// var $ = require('jquery');
 var app_util = require('./module/util');
-var shame = require('./module/shame');
 var global = require('./module/global');
 var config_loader = require('./module/config_loader');
-var trans = require('./module/trans');
-var parallax = require('./clam_module/parallax');
-var contact_form = require('./clam_module/contact_form');
-
+var trans_configurator = require('./module/trans_configurator');
+var ContactForm = require('./module/ContactForm');
 
 // This should be the first one to execute, since other modules depend on the
 // configurations loaded by this one.
 config_loader.load();
 
-// Common and Clam modules. (The order could be important.)
-app_util.init();
-trans.init();
-cutil.createPrototypes(contact_form);
-cutil.createPrototypes(parallax);
+var Parallax = require('./module/Parallax');
+$('.js-parallax').each(function() {
+    new Parallax($(this));
+});
 
-// These two should come last.
+var ContactForm = require('./module/ContactForm');
+$('.js-contact-form').each(function() {
+    new ContactForm($(this));
+});
+
+var FileValidator = require('z-file-validator');
+$('.js-file-validator').each(function() {
+    new FileValidator($(this), 'js-file-validator', function(validationCode, file, config) {
+        if (validationCode === true) {
+            // The input file is valid, so let's show the file's name in the label element
+            validationCode = file.name;
+        }
+
+        $(this).next().text(validationCode);
+    });
+});
+
+trans_configurator.config();
+app_util.init();
 global.init();
-shame.init();

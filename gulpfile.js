@@ -1,10 +1,7 @@
 'use strict';
-var srcPath              = './front_src';
-var destPath             = './web';
-var js_dest_dir          = 'js';
-var css_dest_dir         = 'css';
-var images_dest_dir      = 'images';
-var gulp_bower_dest_dir  = 'bower';
+
+var util = require('./gulpfile_util');
+util.checkEnv();
 
 var gulp       = require('gulp');
 var $          = require('gulp-load-plugins')();
@@ -13,87 +10,185 @@ var path       = require('path');
 var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 var buffer     = require('vinyl-buffer');
-var bower      = require('main-bower-files');
-var sprite     = require('css-sprite').stream;
-var _          = require('lodash');
-var argv       = require('yargs').argv;
 var Q          = require('q');
+// var es         = require('event-stream');
+var merge      = require('merge-stream');
+var del        = require('del');
 
-var env = argv.env || 'dev';
-function src(path) { return srcPath + '/' + path; }
-function dest(path) { return destPath + '/' + path; }
+if (util.env === 'dev') {
+    var sprite   = require('css-sprite').stream;
+    var notifier = require('node-notifier');
+}
 
-gulp.task('bower', function() {
-    return gulp
-        .src(bower(), {base: src('bower_components')})
-        .pipe(gulp.dest(dest(gulp_bower_dest_dir)));
+/**
+ * A simple copy task mainly designed to copy bower components under the public
+ * directory. Depends on the configuration provided by the
+ * `util.getCopyConfiguration` call.
+ */
+gulp.task('copy', function() {
+    var copyConfigurations = util.getCopyConfiguration();
+    var deferred = Q.defer();
+    var copyTaskNum = copyConfigurations.length;
+    var copyTaskDoneCounter = 0;
+
+    if (copyTaskNum > 0) {
+        copyConfigurations.forEach(function(config) {
+            gulp
+                .src(config.src)
+                .pipe(gulp.dest(config.dest))
+                .on('end', function() {
+                    copyTaskDoneCounter++;
+                    if (copyTaskDoneCounter >= copyTaskNum) {
+                        deferred.resolve();
+                    }
+                });
+        });
+    } else {
+        deferred.resolve();
+    }
+
+    return deferred.promise;
 });
 
-gulp.task('scripts', function() {
-    var arrayBundle = function(srcArray) {
-        var deferredPromises = [];
-        _.each(srcArray, function(sourcePath) {
-            var deferred = Q.defer();
-            deferredPromises.push(deferred.promise);
+/**
+ * This task creates browserify bundles, and concatenates them with additional
+ * scripts, like bower components. Depends on the `util.getScriptsConfiguration`
+ * call to determine what the bundles need to be concatenated with.
+ * Note: The bundle scripts will always be the last script appended to the
+ * other files.
+ */
+gulp.task('build-scripts', function() {
+    var filesArray = glob.sync(util.src('scripts/*.js'));
+    var filesArrayLength = filesArray.length;
+    var browserifyStreams = {};
+    var scriptName = null;
+    var deferred = Q.defer();
+    var scriptConfiguration = util.getScriptsConfiguration();
+    var scriptsDoneCounter = 0;
 
-            browserify({
-                entries: sourcePath,
-                debug: env == 'dev',
-                paths: [src('bower_components')]
-            })
-            .bundle()
-            .on('error', handleErrors)
-            .on('end', (function(deferred) {
-                deferred.resolve();
-            }.bind(this, deferred)))
-            .pipe(source(path.basename(sourcePath)))
-            .pipe(buffer())
-            // Mangling sometimes screwed up the browserified modules.
-            .pipe(env == 'prod' ? $.uglify({mangle: false}) : $.util.noop())
-            .pipe(gulp.dest(dest(js_dest_dir)));
-        });
+    del.sync(util.dest(util.jsDestDir));
 
-        return deferredPromises;
-    };
+    for (var i = filesArrayLength - 1; i >= 0; i--) {
+        scriptName = path.basename(filesArray[i]);
+        browserifyStreams[scriptName] = browserify({
+            entries: filesArray[i],
+            debug: util.env === 'dev',
+            paths: [util.src('bower_components')]
+        })
+        .bundle()
+        .on('error', util.handleErrors)
+        .pipe(source(scriptName))
+        .pipe(buffer());
+    }
 
-    var bundleDeferred = Q.defer();
-    glob(src('scripts/*.js'), {}, function(er, files) {
-        Q.all(arrayBundle(files)).then(function() {
-            bundleDeferred.resolve();
-        });
+    Object.keys(browserifyStreams).forEach(function(scriptName) {
+        if (typeof scriptConfiguration[scriptName] === 'undefined') {
+            scriptConfiguration[scriptName] = [];
+        }
     });
 
-    return bundleDeferred.promise;
+    var scriptsNum = Object.keys(scriptConfiguration).length;
+
+    Object.keys(scriptConfiguration).forEach(function(scriptName) {
+        var stream = null;
+        if (typeof browserifyStreams[scriptName] !== 'undefined') {
+            stream = merge(
+                gulp.src(scriptConfiguration[scriptName]),
+                browserifyStreams[scriptName]
+            );
+        } else {
+            stream = gulp.src(scriptConfiguration[scriptName]);
+        }
+
+        stream
+            .pipe($.concat(scriptName))
+            // Mangling sometimes screwed up the browserified modules.
+            .pipe($.if(util.env === 'prod', $.uglify({mangle: false})))
+            .pipe(gulp.dest(util.dest(util.jsDestDir + '/')))
+            .on('end', function() {
+                scriptsDoneCounter++;
+                $.util.log('Generated ' + $.util.colors.magenta(scriptName) + '...');
+                if (scriptsDoneCounter >= scriptsNum) {
+                    deferred.resolve();
+                }
+            });
+    });
+
+    return deferred.promise;
 });
 
-gulp.task('styles', function () {
-    return gulp
-        .src(src('styles/*.scss'))
-        .pipe(env == 'dev' ? $.sourcemaps.init() : $.util.noop())
-        .pipe($.sass({
-            includePaths: [src('bower_components')],
-            imagePath: '../' + images_dest_dir
-        }))
-        .on('error', handleErrors)
-        .pipe($.autoprefixer({browsers: ['> 1%']}))
-        .pipe(env == 'dev' ? $.sourcemaps.write() : $.util.noop())
-        .pipe(env == 'dev' ? $.util.noop() : $.csso())
-        .pipe(gulp.dest(dest(css_dest_dir)));
+gulp.task('build-styles', function () {
+    var filesArray = glob.sync(util.src('styles/[^_]*.scss'));
+    var filesArrayLength = filesArray.length;
+    var styleName = null;
+    var sassStreams = {};
+    var deferred = Q.defer();
+    var stylesConfiguration = util.getStylesConfiguration();
+    var stylesDoneCounter = 0;
+
+    del.sync(util.dest(util.cssDestDir));
+
+    for (var i = filesArrayLength - 1; i >= 0; i--) {
+        styleName = path.basename(filesArray[i]).replace('scss', 'css');
+        sassStreams[styleName] = gulp
+            .src(filesArray[i])
+            .pipe($.if(util.env === 'dev', $.sourcemaps.init()))
+            .pipe($.sass({
+                includePaths: [util.src('bower_components')],
+                imagePath: '../' + util.imagesDestDir
+            }))
+            .on('error', util.handleErrors)
+            .pipe($.autoprefixer({browsers: ['> 1%']}))
+            .pipe($.if(util.env === 'dev', $.sourcemaps.write()));
+    }
+
+    Object.keys(sassStreams).forEach(function(styleName) {
+        if (typeof stylesConfiguration[styleName] === 'undefined') {
+            stylesConfiguration[styleName] = [];
+        }
+    });
+
+    var stylesNum = Object.keys(stylesConfiguration).length;
+
+    Object.keys(stylesConfiguration).forEach(function(styleName) {
+        var stream = null;
+        if (typeof sassStreams[styleName] !== 'undefined') {
+            stream = merge(
+                gulp.src(stylesConfiguration[styleName]),
+                sassStreams[styleName]
+            );
+        } else {
+            stream = gulp.src(stylesConfiguration[styleName]);
+        }
+
+        stream
+            .pipe($.concat(styleName))
+            .pipe($.if(util.env !== 'dev', $.csso()))
+            .pipe(gulp.dest(util.dest(util.cssDestDir + '/')))
+            .on('end', function() {
+                stylesDoneCounter++;
+                $.util.log('Generated ' + $.util.colors.magenta(styleName) + '...');
+                if (stylesDoneCounter >= stylesNum) {
+                    deferred.resolve();
+                }
+            });
+    });
+
+    return deferred.promise;
 });
 
-
-gulp.task('sprites', function () {
-    var runSpriteBuild = function(folderPath, spriteName, processor) {
+gulp.task('build-sprites', function () {
+    var generateSprites = function(folderPath, spriteName, processor) {
         var conf = {
             name: spriteName,
             style: spriteName + '-' + processor + '.scss',
-            cssPath: '../' + images_dest_dir + '/sprites/',
+            cssPath: '../' + util.imagesDestDir + '/sprites/',
             processor: processor,
             prefix: spriteName
         };
 
         if (processor == 'css') {
-            conf.template = src('sprites/css.mustache');
+            conf.template = util.src('sprites/css.mustache');
         }
 
         var deferred = Q.defer();
@@ -103,71 +198,57 @@ gulp.task('sprites', function () {
             .pipe(sprite(conf))
             .pipe($.if(
                 '*.png',
-                gulp.dest(src(images_dest_dir + '/sprites')).on('end', function() {deferred.resolve();}),
-                gulp.dest(src('styles/sprites/')).on('end', function() {deferred.resolve();})
+                gulp.dest(util.dest(util.imagesDestDir + '/sprites')).on('end', function() {deferred.resolve();}),
+                gulp.dest(util.src('styles/sprites/')).on('end', function() {deferred.resolve();})
             ));
 
         return deferred.promise;
     };
 
-    var buildDeferred = Q.defer();
-    glob(src('sprites/*/'), {}, function(er, folders) {
-        var deferredPromises = [];
-        _.each(folders, function(folderPath) {
-            var spriteName = path.basename(folderPath);
-            deferredPromises.push(runSpriteBuild(folderPath, spriteName, 'css'));
-            deferredPromises.push(runSpriteBuild(folderPath, spriteName, 'scss'));
-        });
+    var spriteFolders = glob.sync(util.src('sprites/*/'));
 
-        Q.all(deferredPromises).then(function() {
-            buildDeferred.resolve();
-        });
-    });
+    var promises = [];
+    var spriteFoldersLength = spriteFolders.length;
+    for (var i = spriteFoldersLength - 1; i >= 0; i--) {
+        var spriteName = path.basename(spriteFolders[i]);
+        promises.push(generateSprites(spriteFolders[i], spriteName, 'css'));
+        promises.push(generateSprites(spriteFolders[i], spriteName, 'scss'));
+    };
 
-    return buildDeferred.promise;
+    return Q.all(promises);
 });
 
-gulp.task('images', function () {
-    if (env === 'dev') {
-        return;
-    }
-
+gulp.task('optimize-images', function () {
     return gulp
-        .src(src('images/**/*'))
+        .src(util.dest('images/**/*'))
         .pipe($.imagemin({
             progressive: true,
             interlaced: true
         }))
-        .pipe(gulp.dest(dest(images_dest_dir)));
+        .pipe(gulp.dest(util.dest(util.imagesDestDir)));
 });
 
 gulp.task('watch', function() {
-    $.watch(src('styles/**/*.scss'), function () {
-        gulp.start('styles');
+    $.watch(util.src('styles/**/*.scss'), function () {
+        gulp.start('build-styles');
     });
-    $.watch(src('scripts/**/*.js'), function () {
-        gulp.start('scripts');
+
+    $.watch(util.src('scripts/**/*.js'), function () {
+        gulp.start('build-scripts');
     });
-    $.watch(src('sprites/**/*.png'), function () {
-        gulp.start('sprites');
+
+    $.watch(util.src('sprites/**/*.png'), function () {
+        gulp.start('build-sprites');
+    });
+
+    $.watch(util.dest('images/**/*'), function () {
+        notifier.notify({
+            'title': 'Reminder',
+            'message': 'Don\'t forget to optimize the images you just added!'
+        });
     });
 });
 
-gulp.task('build', ['bower', 'scripts', 'sprites', 'images'], function() {
-    gulp.start('styles');
-});
+gulp.task('build', ['build-scripts', 'build-styles']);
 
 gulp.task('default', ['build']);
-
-function handleErrors() {
-    var args = Array.prototype.slice.call(arguments);
-
-    // Send error to notification center with gulp-notify
-    $.notify.onError({
-        title: 'Compile Error',
-        message: '<%= error.message %>'
-    }).apply(this, args);
-
-    // Keep gulp from hanging on this task
-    this.emit('end');
-};

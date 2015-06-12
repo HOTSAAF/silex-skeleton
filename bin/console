@@ -45,7 +45,6 @@ $console->setDispatcher($app['dispatcher']);
         ),
         new App\Command\ParameterCheckerCommand(
             $rootPath,
-            'silex-skeleton/src/config/parameters.yml',
             $rootPath . '/src/config/parameters.yml.dist',
             $ftp_config
         ),
@@ -54,6 +53,8 @@ $console->setDispatcher($app['dispatcher']);
         new App\Command\SetupProjectCommand($app['doctrine']->getManager()),
         new App\Command\DropDatabaseCommand($app['config']['db']),
         new App\Command\CreateDatabaseCommand($app['config']['db']),
+        new App\Command\SlackNotifCommand($app['config']['deployment']['slack']),
+
     ]);
 
 // Doctrine command

@@ -10,6 +10,7 @@ web/bower
 
 .DS_Store
 node_modules
+npm-debug.log
 front_src/bower_components
 
 build

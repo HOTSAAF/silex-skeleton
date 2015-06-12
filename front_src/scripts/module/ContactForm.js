@@ -1,54 +1,46 @@
 'use strict';
-var clam_module = require('clam/core/module');
-// var clam_container = require('clam/core/container');
-// var modifier = require('clam/core/modifier');
-// var $ = require('jquery');
-var inherits = require('util').inherits;
 var api_ajax = require('../module/api_ajax');
-var trans = require('../module/trans');
+var trans = require('z-trans');
 var grecaptcha = require('grecaptcha');
 var config_loader = require('../module/config_loader');
+var HookFinder = require('z-hook-finder');
+var Lock = require('z-lock');
 
-var settings = {
-    type: 'singleton',
-    // hasGlobalHooks: true,
-    conf: {}
-};
-
-function ContactForm($jQObj, conf) {
+function ContactForm($object) {
     var self = this;
-    clam_module.apply(this, [$jQObj, settings, conf]);
-    // this.expose();
-    // throw this.prettify('error');
-    // clam_container.get('clam-module');
 
     this.config = config_loader.get('contact_form');
 
-    this.$form = this.module.$object.find('form');
-    this.$form.on(this.ns('submit'), function(e) {
-        self.onFormSubmit(e);
-    });
+    this.$object = $object;
+    this.moduleName = 'contact-form';
+    this.finder = new HookFinder(this.$object, 'js-' + this.moduleName + '__');
+    this.animationLock = new Lock();
+
+    this.$form = this.$object.find('form');
+    this.$form.on('submit', this.onFormSubmit.bind(this));
 
     this.$inputs = this.$form.find('[name]').addBack('[name]');
 
     // Initializing reCAPTCHA widget.
     // We must render it manually, so that we can save the created widget, which
     // can used later as the "opt_widget_id" for resetting.
-    this.reCaptchaWidget = grecaptcha.render(
-        this.getHook('recaptcha')[0],
-        {
-            sitekey: this.config.recaptcha_site_key
-        }
-    );
+    if (!this.config.recaptcha_site_key) {
+        console.error('Missing reCaptcha site key.');
+    } else {
+        this.reCaptchaWidget = grecaptcha.render(
+            this.finder.find('recaptcha', 1)[0],
+            {
+                sitekey: this.config.recaptcha_site_key
+            }
+        );
+    }
 }
-
-inherits(ContactForm, clam_module);
 
 ContactForm.prototype.onFormSubmit = function(e) {
     var self = this;
     e.preventDefault();
 
-    if (this.locked) {
+    if (this.animationLock.isLocked()) {
         return;
     }
 
@@ -88,7 +80,7 @@ ContactForm.prototype.onFormSubmit = function(e) {
 };
 
 ContactForm.prototype.lock = function() {
-    this.locked = true;
+    this.animationLock.lock();
     this.$form.find('[type=submit]')
         .prop('disabled', true)
         .text(trans.trans('label_send_btn', null, 'contact_form') + '...')
@@ -96,7 +88,7 @@ ContactForm.prototype.lock = function() {
 };
 
 ContactForm.prototype.unlock = function() {
-    this.locked = false;
+    this.animationLock.unLock();
     this.$form.find('[type=submit]')
         .prop('disabled', false)
         .text(trans.trans('label_send_btn', null, 'contact_form') + '')
@@ -108,7 +100,7 @@ ContactForm.prototype.removeAllErrors = function() {
     this.$inputs.next('ul').remove();
 
     // An exception for reCAPTCHA
-    this.getHook('recaptcha').next('ul').remove();
+    this.finder.find('recaptcha', 1).next('ul').remove();
 };
 
 ContactForm.prototype.populateFormWithErrors = function(formErrors) {
@@ -133,7 +125,7 @@ ContactForm.prototype.addErrorsToField = function(fieldName, errors) {
     var $field = null;
     if (fieldName == 'recaptcha_response') {
         // An exception for reCAPTCHA
-        $field = this.getHook('recaptcha');
+        $field = this.finder.find('recaptcha', 1);
     } else if (fieldName === this.$form.attr('name')) {
         // If the "field" is the form itself (Global errors)
         $field = this.$form;

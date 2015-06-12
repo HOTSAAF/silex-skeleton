@@ -1,3 +1,6 @@
+# Silex Skeleton Project
+[![Project Status](http://stillmaintained.com/ZeeCoder/silex-skeleton.png)](http://stillmaintained.com/ZeeCoder/silex-skeleton)
+
 ## Needed documentation
  - onesky command documentation
  - include a list of features in this skeleton
@@ -25,16 +28,4 @@
   (It concatenates every file not starting with an underscore.)
 
 ## Deployment
-Run `./bin/deploy deploy:<dev/prod>`.
-This command will build, and deploy the application using the configurations
-in `src/config/deploy_stages/`.
-Assets which are accessed through the `asset()` twig function are
-automatically busted.
-Assets accessed through the `v-image-url` sass function must be busted
-manually, by incrementing the `$g-asset-version` variable in the `_global.scss`
-file.
-
-## Afterworks on windows (at least Vista):
-- Remove the `web/images` file,
-- Run `git update-index --assume-unchanged web/images`,
-- Run `mklink /D web\images ..\front_src\images`.
+Check out the `./bin/console app:deploy` command.

@@ -11,7 +11,7 @@
 {%- block form_widget_simple -%}
     {%- set type = type|default('text') -%}
     {% set attr = attr|merge({class: 'c-contact-form__input'}) %}
-    <div class="jsc-contact-form__input c-contact-form__input-wrapper">
+    <div class="js-contact-form__input c-contact-form__input-wrapper">
         <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
     </div>
 {%- endblock form_widget_simple -%}

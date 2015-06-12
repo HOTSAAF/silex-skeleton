@@ -1,19 +1,19 @@
 # The "key" here refers to translation keys in the "good_to_know.yml"
 # translation file.
 # The admin route names are used here as groups.
-- key: test_key_one
-  groups:
+- text: test_key_one
+  group:
       - admin_home
 
-- key: test_key_two
-  groups:
+- text: test_key_two
+  group:
       - admin_home
 
-- key: test_key_three
-  groups:
+- text: test_key_three
+  group:
       - admin_home
 
 # These good-to-know string are be used in the main "/" route.
-- {key: test_non_admin_1, groups: [non_admin]}
-- {key: test_non_admin_2, groups: [non_admin]}
-- {key: test_non_admin_3, groups: [non_admin]}
+- {text: test_non_admin_1, group: [non_admin]}
+- {text: test_non_admin_2, group: [non_admin]}
+- {text: test_non_admin_3, group: [non_admin]}

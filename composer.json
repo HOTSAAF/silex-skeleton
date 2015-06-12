@@ -30,7 +30,8 @@
         "google/recaptcha": "~1.1",
         "doctrine/migrations": "1.0.*@dev",
         "nelmio/alice": "^1.7",
-        "knplabs/knp-components": "~1.2"
+        "knplabs/knp-components": "~1.2",
+        "zeecoder/good-to-know": "^1.0"
     },
     "require-dev": {
         "dg/ftp-deployment": "~2.1",
