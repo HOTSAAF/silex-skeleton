@@ -1,2 +1,7 @@
 ---
 meta_title: "%project% Admin"
+add_item: Új hozzáadása
+# good_to_know_lable: Good to know
+good_to_know_lable: Jó ha tudod
+link_title_preview: Elölnézet
+link_title_delete: Törlés

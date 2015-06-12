@@ -33,6 +33,7 @@
 
 // Components
 // @import "components/c-btn-example";
+@import "admin/components/c-btn";
 @import "admin/components/c-grid";
 @import "admin/components/c-page";
 @import "admin/components/c-content";
@@ -47,6 +48,9 @@
 @import "admin/components/c-profile";
 @import "admin/components/c-flash-bag";
 @import "admin/components/c-paginate";
+@import "admin/components/c-admin-form";
+@import "admin/components/c-galery-list";
+@import "admin/components/c-login";
 
 // Must always be at the bottom, so that it could overwrite anything temporarily.
 @import "admin/shame";

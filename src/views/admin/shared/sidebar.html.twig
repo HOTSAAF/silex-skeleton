@@ -13,12 +13,12 @@
             <span class="c-navigation__label">{{ "article_label"|trans }}</span>
         </a>
     </li>
-    <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
-        <a href="{{ path('admin_home') }}" class="c-navigation__link">
+    <li class="c-navigation__item {{ request.get('_route') == 'admin_gallery_index'?'c-navigation__item--active':'' }}">
+        <a href="{{ path('admin_gallery_index') }}" class="c-navigation__link">
             <span class="s-admin-icon s-admin-icon-envelope c-navigation__icon"></span>
-            <span class="c-navigation__label">{{ "galery_label"|trans }}</span>
+            <span class="c-navigation__label">{{ "gallery_label"|trans }}</span>
         </a>
-    </li>
+    </li>{#
     <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
         <a href="{{ path('admin_home') }}" class="c-navigation__link">
             <span class="s-admin-icon s-admin-icon-calendar c-navigation__icon"></span>
@@ -30,7 +30,7 @@
             <span class="s-admin-icon s-admin-icon-analytics c-navigation__icon"></span>
             <span class="c-navigation__label">{{ "analytics"|trans }}</span>
         </a>
-    </li>
+    </li> #}
     <li class="c-navigation__item {{ request.get('_route') == ''?'c-navigation__item--active':'' }}">
         <a href="{{ path('home') }}" class="c-navigation__link">
             <span class="s-admin-icon s-admin-icon-gear c-navigation__icon"></span>

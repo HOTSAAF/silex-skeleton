@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49ffae71597cc0ed20d3ac7d5e5a623a",
+    "hash": "e62ccf91cd164a640c177150944b17f4",
     "packages": [
         {
             "name": "dflydev/doctrine-orm-service-provider",
@@ -596,7 +596,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/a4f14d3a3d397104e557ec65d1a4e43bb86e4ddf",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/67f02686c6c779ae50489728b91026bc8199720c",
                 "reference": "a4f14d3a3d397104e557ec65d1a4e43bb86e4ddf",
                 "shasum": ""
             },
@@ -852,6 +852,63 @@
                 "spam"
             ],
             "time": "2015-03-16 13:45:08"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2014-11-11 11:36:02"
         },
         {
             "name": "intervention/image",
@@ -1317,7 +1374,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/bdbf5b78181dbfd2cf41d100e0866d385b151638",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/cfb6ed098aaf9a62434761033d4b611662549b8b",
                 "reference": "3d4cf2fed13968ec300e24531f8ed0d8740c33b3",
                 "shasum": ""
             },
@@ -1405,7 +1462,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/bf7dec2b38cf7fbda95df90caecc1885cbcd65b8",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/ff164a034bd902300d93c140e1a8f3b3af6a93ca",
                 "reference": "103209be88501fc795ae451ed32d9f5944b7dece",
                 "shasum": ""
             },

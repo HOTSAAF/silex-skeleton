@@ -6,3 +6,5 @@ test_key_three: "%upload_max_filesize% ipsum dolor sit amet, %consectetur% adipi
 test_non_admin_1: "The good to know service can be used outside of the admin!"
 test_non_admin_2: "See? :)"
 test_non_admin_3: "I can still tell you what the max filesize for uploaded files! It's %upload_max_filesize%."
+
+login_warning_info: "Ez az oldal a website adminisztrátorainak van fenntartva, amennyiben vissza szeretne térni a weboldalra, kérjük %back_to_site_link%."

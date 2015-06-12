@@ -1,0 +1,68 @@
+{% extends "admin/_base.html.twig" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ asset('bower/jquery-prettyPhoto/css/prettyPhoto.css') }}">
+{% endblock %}
+
+{% block headline %}
+    {% embed "admin/includes/_headline.html.twig" %}
+        {% block headline_title %}
+            Galéria
+        {% endblock %}
+        {% block headline_description %}
+            A feltöltött képek listája
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block content %}
+    <section class="c-content">
+        <div class="c-content__headline">
+
+            <a href="{{ path('admin_gallery_new') }}" class="c-btn c-btn--float_r c-btn--bg_green">
+                <span class="s-admin-icon s-admin-icon-plus c-btn__icon"></span>
+                {{ 'add_item'|trans([], 'admin_base') }}
+            </a>
+
+            <h2 class="c-content__title">Képek ( {{ gallery_collection|length }} darab )</h2>
+            <span class="c-content__description">A galéria elemeit Drag and Drop módszerrrel sorba rendezheti</span>
+
+        </div>
+
+        <div class="c-content__sep"></div>
+
+        <div id="js-sortable" class="js-preview js-ddsort"
+            {{ data_attr('js-ddsort', { "action": "sortable" }) }}
+           {#  {{ data_attr('js-preview', { "paged": true }) }} #}
+        >
+            {% for GalleryImage in gallery_collection %}
+                {% spaceless %}
+                    <div class="js-ddsort__element c-galery-list" id="item_{{ GalleryImage.id }}">
+                        <img src="{{ asset(GalleryImage.getImageWebPath('xx-small'), true) }}" class="c-galery-list__image">
+                        <div class="c-galery-list__operaions">
+                            {# <a href="{{ asset(GalleryImage.getImageWebPath('big'), true) }}" class="js-preview__element c-operation-btn" title="{{ 'link_title_preview'|trans([], 'admin_base') }}" rel="prettyPhoto[admin_gallery]">
+                                 <span class="s-admin-icon s-admin-icon-preview"></span>
+                            </a> #}
+                            <a href="javascript:void(false);" class="js-preview__element c-operation-btn" title="{{ 'link_title_preview'|trans([], 'admin_base') }}" {{ data_attr('js-preview', {'src': asset(GalleryImage.getImageWebPath('big'), true) }) }}>
+                                 <span class="s-admin-icon s-admin-icon-preview"></span>
+                            </a>
+                            <form action="{{ path('admin_gallery_remove', {'id':GalleryImage.id}) }}" class="c-operation-btn jsc-swal"  title="{{ 'link_title_delete'|trans([], 'admin_base') }}" data-jsc-swal='{
+                                "swal": {
+                                    "title": "Megerősítés",
+                                    "text": "Biztosan törölni akarod a kiválasztott elemet?"
+                                },
+                                "isForm": true
+                            }'>
+                                <button class="s-admin-icon s-admin-icon-delete"></button>
+                            </form>
+                        </div>
+                    </div>
+                {% endspaceless %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset('bower/jquery-prettyPhoto/js/jquery.prettyPhoto.js') }}"></script>
+{% endblock %}

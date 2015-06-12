@@ -1,0 +1,126 @@
+$amp: ".c-btn";
+
+#{$amp} {
+    // SASS variables are scoped to the current closure, feel free to use them.
+    $transitionSpeed: .2s;
+
+    display: block;
+    cursor: pointer;
+    background: #ccc;
+    border: 1px solid #000;
+    color: $c-white;
+    font-size: 14px;
+    font-weight: $fw-semibold;
+    line-height: 1em;
+    padding: 10px 20px;
+    border-radius: 2px;
+    text-shadow: 0 2px 0 hex-to-rgba($c-apple, 0.5);
+    text-decoration: none;
+    outline: none;
+
+    transition:
+        background-color $transitionSpeed,
+        border-color $transitionSpeed,
+        color $transitionSpeed;
+
+    &__icon {
+        margin-right: 5px;
+    }
+
+    // Modifier syntax
+    &--inline {
+        display: inline-block;
+    }
+
+    &--cancel {
+        background-color: transparent;
+        margin: 0 10px;
+        border: 1px solid transparent;
+        font-weight: $fw-regular;
+        color: $c-blue-bayoux;
+        text-shadow: none;
+        html:not(.md_isMobile) & {
+            &:hover {
+                background: hex-to-rgba($c-black, .1);
+                border: 1px solid hex-to-rgba($c-black, .3);
+            }
+        }
+    }
+
+    &--float {
+        &_r {
+            float: right;
+        }
+
+        &_l {
+            float: left;
+        }
+    }
+
+    // Modifier with a value
+    &--bg {
+        &_red {
+            background-color: #f00;
+        }
+
+        &_green {
+            background-color: $c-mantis;
+            border-color: $c-apple;
+        }
+
+        &_blue {
+            background-color: #00f;
+        }
+    }
+
+    html:not(.md_isMobile) & {
+        &:hover {
+            @extend %hover;
+        }
+
+        &--bg_red:hover {
+            @extend %hover-red;
+        }
+
+        &--bg_green:hover {
+            @extend %hover-green;
+        }
+
+        &--bg_blue:hover {
+            @extend %hover-blue;
+        }
+    }
+
+    html.md_isMobile & {
+        &--active-by-default {
+            @extend %hover;
+
+            &#{$amp}--bg_red {
+                @extend %hover-red;
+            }
+
+            &#{$amp}--bg_green {
+                @extend %hover-green;
+            }
+
+            &#{$amp}--bg_blue {
+                @extend %hover-blue;
+            }
+        }
+    }
+}
+
+%hover {
+
+    &-red {
+        background: darken(#f00, 20%);
+    }
+
+    &-green {
+        background: darken($c-mantis, 10%);
+    }
+
+    &-blue {
+        background: darken(#00f, 20%);
+    }
+}

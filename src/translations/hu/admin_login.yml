@@ -1,2 +1,9 @@
 ---
 meta_title: "%project% Admin login"
+login_title: "Belépés"
+login_subtitle: "Admin felület"
+login_username: Felhasználónév
+login_password: Jelszó
+login_btn_label: Belépés
+login_warning_title: Figyelmeztetés
+login_error_message: Hibás belépési adatok.

@@ -177,4 +177,23 @@ class ApiController
             ],
         ]);
     }
+
+    public function setOrderGalleryImagesAction(Request $request, Application $app) {
+        $em = $app['doctrine']->getManager();
+        $repo = $em->getRepository('\\App\\Entity\\GalleryImage');
+
+        $order = $request->get('sort', []);
+        foreach ($order as $k => $v) {
+            try {
+                $Entity = $repo->findOneById($v);
+                $Entity->setOrder($k+1);
+                $em->persist($Entity);
+                $em->flush();
+            } catch (\Exception $e) {
+                throw new ApiException('Order updating error!');
+            }
+        }
+
+        return $app['service.api']->getResponse('Done');
+    }
 }

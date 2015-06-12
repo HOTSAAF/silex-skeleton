@@ -6,5 +6,6 @@ return [
         'user' => null,
         'pass' => null,
         'remote_path' => '/',
+        'parameters_yml' => 'src/config/parameters.yml',
     ],
 ];

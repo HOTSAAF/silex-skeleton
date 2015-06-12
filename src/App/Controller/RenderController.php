@@ -61,4 +61,14 @@ class RenderController
             'tips' => $tips,
         ));
     }
+
+    public function loginGoodToKnow(Request $request, Application $app)
+    {
+        $tips = $app['service.good_to_know']->getAllByGroup('login_page');
+
+        return $app['twig']->render('admin/includes/_good_to_know.html.twig', array(
+            'title' => $app['translator']->trans('login_warning_title', [], 'admin_login'),
+            'tips' => $tips,
+        ));
+    }
 }

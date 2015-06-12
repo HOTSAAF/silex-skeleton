@@ -22,7 +22,8 @@ module.exports = {
             'admin.js': [
                 this.src('bower_components/modernizr/modernizr.js'),
                 this.src('bower_components/foundation/js/foundation.min.js'),
-                this.src('bower_components/sweetalert/lib/sweet-alert.js')
+                this.src('bower_components/sweetalert/lib/sweet-alert.js'),
+                this.src('bower_components/jquery-ui/jquery-ui.min.js')
             ],
             'jquery.js': [
                 this.src('bower_components/jquery/dist/jquery.min.js')
@@ -43,7 +44,12 @@ module.exports = {
     },
 
     getCopyConfiguration: function() {
-        return [];
+        return [
+            {
+                src: this.src('bower_components/jquery-prettyPhoto/**/*'),
+                dest: this.dest('bower/jquery-prettyPhoto')
+            }
+        ];
 
         // Example
         return [

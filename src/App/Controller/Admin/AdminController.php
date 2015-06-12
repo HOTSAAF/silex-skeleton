@@ -16,7 +16,7 @@ class AdminController
 
         $query = $repo->findAllByParameters(
             $request->query->get('search'),
-            $this->getOrderByArray($request->query->get('order', 'id.asc'))
+            $this->getOrderByArray($request->query->get('order', $this->getDefaultOrder()))
         );
 
         $paginator = $repo->paginate(

@@ -10,64 +10,84 @@ $app->post('/contact_send', 'App\\Controller\\HomeController::contactAction')->b
 $app->get('/login', 'App\\Controller\\Admin\\DefaultAdminController::loginAction')->bind('login');
 
 // Admin Routes
-$adminControllerFactory = $app['controllers_factory'];
+$controllerFactory = $app['controllers_factory'];
 
-    $adminControllerFactory
+    $controllerFactory
         ->get('/', 'App\\Controller\\Admin\\DefaultAdminController::indexAction')
         ->bind('admin_home')
     ;
 
-    $adminControllerFactory
-        ->match('/article', 'App\\Controller\\Admin\\Article\\ArticleAdminController::indexAction')
+    $controllerFactory
+        ->match('/article', 'App\\Controller\\Admin\\ArticleAdminController::indexAction')
         ->bind('admin_article_index')
     ;
 
-    $adminControllerFactory
-        ->match('article/remove/{id}', 'App\\Controller\\Admin\\Article\\ArticleAdminController::removeAction')
+    $controllerFactory
+        ->match('article/remove/{id}', 'App\\Controller\\Admin\\ArticleAdminController::removeAction')
         ->bind('admin_article_remove')
     ;
 
-    // $adminControllerFactory
-    //     ->match('/test/article/{id}/edit', 'App\\Controller\\Admin\\ArticleTestAdminController::editArticleAction')
-    //     ->bind('test_new_article')
-    // ;
+    $controllerFactory
+        ->match('/article/{id}/edit', 'App\\Controller\\Admin\\ArticleAdminController::editAction')
+        ->bind('admin_article_edit')
+    ;
 
-    // $adminControllerFactory
-    //     ->match('/test/article', 'App\\Controller\\Admin\\ArticleTestAdminController::indexAction')
-    //     ->bind('test_list_article')
-    // ;
+    $controllerFactory
+        ->match('/article/new', 'App\\Controller\\Admin\\ArticleAdminController::newAction')
+        ->bind('admin_article_new')
+    ;
 
-$app->mount('/admin', $adminControllerFactory);
+    // Galery
+    $controllerFactory
+        ->get('/gallery', 'App\\Controller\\Admin\\GalleryAdminController::indexAction')
+        ->bind('admin_gallery_index')
+    ;
+
+    $controllerFactory
+        ->match('/gallery/new', 'App\\Controller\\Admin\\GalleryAdminController::newAction')
+        ->bind('admin_gallery_new')
+    ;
+
+    $controllerFactory
+        ->get('/gallery/{id}/remove', 'App\\Controller\\Admin\\GalleryAdminController::removeAction')
+        ->bind('admin_gallery_remove')
+    ;
+
+$app->mount('/admin', $controllerFactory);
 
 // Api routes
-$apiControllerFactory = $app['controllers_factory'];
-    $apiControllerFactory
+$controllerFactory = $app['controllers_factory'];
+    $controllerFactory
         ->get('/', 'App\\Controller\\ApiController::indexAction')
         ->bind('api_index')
     ;
-    $apiControllerFactory
+    $controllerFactory
+        ->post('/sortable', 'App\\Controller\\ApiController::setOrderGalleryImagesAction')
+        ->bind('api_sortable_galery_image')
+    ;
+    $controllerFactory
         ->post('/subscribe_to_mailchimp', 'App\\Controller\\ApiController::subscribeToMailChimpAction')
         ->bind('api_subscribe_to_mailchimp')
     ;
-    $apiControllerFactory
+    $controllerFactory
         ->post('/send_contact_mail', 'App\\Controller\\ApiController::sendContactMailAction')
         ->bind('api_send_contact_mail')
     ;
-    $apiControllerFactory
+    $controllerFactory
         ->get('/auth_test', 'App\\Controller\\ApiController::authTestAction')
         ->bind('api_auth_test')
     ;
-    $apiControllerFactory
+    $controllerFactory
         ->get('/admin_call_test', 'App\\Controller\\ApiController::adminCallTestAction')
         ->secure('ROLE_ADMIN')
         ->bind('api_admin_call_test')
     ;
-$app->mount('/api/{version}', $apiControllerFactory);
+$app->mount('/api/{version}', $controllerFactory);
 
 // Test routes for the DEV environment
 if (AppUtility::getEnv() === 'dev') {
-    $apiControllerFactory = $app['controllers_factory'];
-        $apiControllerFactory->get('/contact-form', 'App\\Controller\\TestController::contactFormAction');
-        $apiControllerFactory->get('/paralax', 'App\\Controller\\TestController::paralaxAction');
-    $app->mount('/test', $apiControllerFactory);
+    $controllerFactory = $app['controllers_factory'];
+        $controllerFactory->get('/contact-form', 'App\\Controller\\TestController::contactFormAction');
+        $controllerFactory->get('/paralax', 'App\\Controller\\TestController::paralaxAction');
+    $app->mount('/test', $controllerFactory);
 }

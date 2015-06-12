@@ -31,7 +31,8 @@
         "doctrine/migrations": "1.0.*@dev",
         "nelmio/alice": "^1.7",
         "knplabs/knp-components": "~1.2",
-        "zeecoder/good-to-know": "^1.0"
+        "zeecoder/good-to-know": "^1.0",
+        "imagine/imagine": "^0.6.2"
     },
     "require-dev": {
         "dg/ftp-deployment": "~2.1",

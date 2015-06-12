@@ -8,8 +8,9 @@ $bell: -4px -160px 20px 20px;
 $envelope: -4px -188px 20px 20px;
 $gear: -4px -216px 20px 20px;
 $delete: -4px -244px 25px 25px;
-$edit: -4px -277px 25px 25px;
-$cross: -4px -310px 36px 36px;
+$preview: -4px -277px 25px 25px;
+$edit: -4px -310px 25px 25px;
+$cross: -4px -343px 36px 36px;
 
 @mixin sprite-width($sprite) {
   width: nth($sprite, 3);

@@ -1,0 +1,82 @@
+$amp: ".c-admin-form";
+
+#{$amp} {
+    display: block;
+    border-top: solid 2px $c-concrete;
+    padding-top: 20px;
+
+    &__row {
+        margin-bottom: 30px;
+    }
+
+    &__btn-row {
+        margin-bottom: 30px;
+        &--inline {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    &__label {
+        display: block;
+        font-weight: $fw-bold;
+        color: $c-blue-bayoux;
+        font-size: 15px;
+        line-height: 23px;
+        margin-top: -3px;
+        margin-bottom: 10px;
+        padding-right: 20px;
+
+        &--checkbox, &--radio {
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+    }
+
+
+    &__input {
+        margin-bottom: 15px;
+        border: solid 1px $c-silver-chalice;
+        border-radius: 5px;
+        outline: none;
+        padding: 15px 20px;
+        display: block;
+        width: 100%;
+        @include placeholder {
+            color: hex-to-rgba($c-mine-shaft, .3);
+        }
+    }
+
+
+    &__textarea {
+        margin-bottom: 15px;
+        border: solid 1px $c-silver-chalice;
+        border-radius: 5px;
+        outline: none;
+        padding: 15px 20px;
+        display: block;
+        width: 100%;
+        @include placeholder {
+            color: hex-to-rgba($c-mine-shaft, .3);
+        }
+    }
+
+    &__error-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        > li {
+            color: $c-persian-red;
+            font-size: 13px;
+            line-height: 15px;
+            margin-top: -3px;
+            margin-bottom: 5px;
+        }
+    }
+
+    &--sales-form {
+        max-width: 400px;
+    }
+}

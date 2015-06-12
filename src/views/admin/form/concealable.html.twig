@@ -1,0 +1,7 @@
+{% block form_row %}
+    <div class="js-hider__{{ id|replace('_', '-') }} c-admin-form__row">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock %}

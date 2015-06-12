@@ -1,0 +1,32 @@
+$amp: ".c-galery-list";
+
+#{$amp} {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 7px 15px;
+    border: 2px solid $c-concrete;
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 180px;
+    // min-height: 165px;
+    text-align: left;
+
+    &:hover {
+       border: 2px solid $c-eastern-blue;
+       background-color: hex-to-rgba($c-eastern-blue, .05);
+       cursor: move;
+    }
+
+    &__image {
+        margin-top: 10px;
+    }
+
+    &__operaions {
+        padding-bottom: 10px;
+        text-align: right;
+        @include clearfix();
+        .c-operation-btn {
+            margin-right: 0;
+        }
+    }
+}

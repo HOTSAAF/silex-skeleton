@@ -1,0 +1,30 @@
+{% extends "admin/_base.html.twig" %}
+
+{% form_theme form 'admin/form/base.html.twig' %}
+{% form_theme form.save 'admin/form/submit.html.twig' %}
+{% form_theme form.cancel 'admin/form/reset.html.twig' %}
+
+{% block headline %}
+    {% embed "admin/includes/_headline.html.twig" %}
+        {% block headline_title %}
+            Új léterehozása
+        {% endblock %}
+        {% block headline_description %}
+            Hírek
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block content %}
+    <section class="c-content">
+        <div class="c-content__headline">
+            <h2 class="c-content__title">Hír adatai</h2>
+            <span class="c-content__description">Kérjük töltse ki a Hírek *-al jelölt kötelező adatait.</span>
+        </div>
+
+        <div class="c-admin-form c-admin-form--article-form">
+            {{ form(form) }}
+        </div>
+
+    </section>
+{% endblock %}
