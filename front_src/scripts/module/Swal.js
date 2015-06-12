@@ -7,6 +7,7 @@ function Swal($object, conf) {
 
     this.$object = $object;
     this.moduleName = 'swal';
+    this.ns = new Namespacer(this.moduleName);
     this.config = dom_config.load(this.$object, 'jsc-' + this.moduleName, {
         swal: {
             title: '',
@@ -24,14 +25,14 @@ function Swal($object, conf) {
     this.tagName = this.$object.prop('tagName');
     if (this.isForm()) {
         this.submitting = false;
-        this.$object.on('submit', function(e) {
+        this.$object.on(this.ns.get('submit'), function(e) {
             if (!self.submitting) {
                 e.preventDefault();
                 self.forwardToPlugin();
             }
         });
     } else {
-        this.$object.on('click', function(e) {
+        this.$object.on(this.ns.get('click'), function(e) {
             e.preventDefault();
             self.forwardToPlugin();
         });

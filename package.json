@@ -33,6 +33,7 @@
     "z-file-validator": "^0.1.0",
     "z-hook-finder": "^0.1.1",
     "z-lock": "^1.0.0",
+    "z-namespacer": "^1.0.0",
     "z-trans": "^1.0.0"
   },
   "engines": {
