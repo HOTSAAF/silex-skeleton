@@ -3,10 +3,8 @@ var data_loader = require('./data_loader');
 
 module.exports = {
     config: function() {
-        console.log('in');
         // Initializing the trans module
         var transData = data_loader.get('ztrans');
-        console.log(transData);
         for (var locale in transData) {
             trans.addData(locale, transData[locale]);
         }
