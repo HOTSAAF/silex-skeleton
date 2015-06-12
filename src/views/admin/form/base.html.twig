@@ -1,0 +1,35 @@
+{% block form_row %}
+    {% spaceless %}
+    <div class="c-admin-form__row">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block form_label %}
+    {% set label_attr = label_attr|merge({class: ' c-admin-form__label ' }) %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+{% endblock %}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    {% set attr = attr|merge({class: 'c-admin-form__input ' ~ ( attr.class is defined ? attr.class : '' )}) %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock form_widget_simple -%}
+
+{%- block textarea_widget -%}
+    {% set attr = attr|merge({class: 'c-admin-form__textarea ' ~ ( attr.class is defined ? attr.class : '' )}) %}
+    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock textarea_widget -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+    <ul class="c-admin-form__error-list">
+        {%- for error in errors -%}
+            <li>{{ error.message }}</li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}

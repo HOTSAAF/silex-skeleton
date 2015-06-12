@@ -18,6 +18,12 @@ class Article
 {
     use \App\Entity\EntityTrait\ImageTrait;
 
+
+    protected function getImageDir()
+    {
+        return 'uploads/articles';
+    }
+
     function getVariations()
     {
         return ['big', 'medium', 'small'];
@@ -44,12 +50,12 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=250)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=250)
      */
     private $slug;
 
@@ -268,6 +274,16 @@ class Article
     public function addCreatedAt() {
         if ($this->createdAt == null) {
             $this->createdAt = new \DateTime('Now');
+        }
+    }
+
+
+     /**
+     * @ORM\PrePersist
+     */
+    public function addActivatedAt() {
+        if ($this->activatedAt == null) {
+            $this->activatedAt = new \DateTime('Now');
         }
     }
 

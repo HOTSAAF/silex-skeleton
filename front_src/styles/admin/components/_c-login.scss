@@ -1,0 +1,99 @@
+$amp: ".c-login";
+
+#{$amp} {
+    background-color: $c-panel-bgcolor;
+    height: 100%;
+    position: relative;
+
+    &__wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $c-white;
+        border-radius: 10px;
+        margin: 0 auto;
+        padding: 40px;
+        max-width: rem-calc(760);
+        width: 100%;
+        box-shadow: 0 0 30px rgba(0, 0, 0, .3);
+    }
+
+    &__header {
+        @include clearfix();
+    }
+
+        &__logo {
+            float: right;
+            text-align: right;
+        }
+
+    &__body {
+        // padding-top: 15px;
+    }
+
+        &__panel {
+            display: inline-block;
+            vertical-align: top;
+
+            &--left {
+                padding-right: 30px;
+                max-width: 335px;
+                width: 100%;
+            }
+
+            &--right {
+                padding-left: 20px;
+                max-width: 345px;
+                width: 100%;
+            }
+        }
+
+
+    // Other componenet
+    .c-page {
+        &__headline {
+            margin-bottom: 15px;
+        }
+    }
+
+    .c-flash-bag {
+        margin-bottom: 15px;
+    }
+
+    .c-admin-form {
+        &__row {
+            margin-bottom: 15px;
+        }
+
+        &__btn-row {
+            margin-bottom: 0;
+            margin-top: 30px;
+        }
+    }
+
+    .c-btn {
+        line-height: 30px;
+        width: 61%;
+        font-weight: $fw-bold;
+        text-shadow: 0 3px 0 hex-to-rgba($c-apple, 0.5);
+        font-size: 15px;
+    }
+
+    .c-good-to-know {
+        padding: 25px 20px;
+        margin-top: 30px;
+        &__list {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        &__item {
+            > a {
+                color: $c-armadillo;
+                font-weight: $fw-bold;
+            }
+        }
+    }
+
+}

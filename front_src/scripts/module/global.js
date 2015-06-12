@@ -8,11 +8,11 @@ var image_loader = require('./image_loader');
 
 module.exports = {
     init: function() {
-        $(document).foundation({
-            equalizer: {
-                equalize_on_stack: false
-            }
-        });
+        // $(document).foundation({
+        //     equalizer: {
+        //         equalize_on_stack: false
+        //     }
+        // });
 
         // Test call
         api_ajax

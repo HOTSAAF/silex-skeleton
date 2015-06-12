@@ -1,6 +1,6 @@
 {% if tips|length > 0 %}
     <div class="c-good-to-know">
-        <div class="c-good-to-know__title">Good to know</div>
+        <div class="c-good-to-know__title">{{ title is defined ? title : "good_to_know_lable"|trans([], 'admin_base')}}</div>
         <ul class="c-good-to-know__list">
             {% for tip in tips %}
                 <li class="c-good-to-know__item">{{ tip|raw }}</li>

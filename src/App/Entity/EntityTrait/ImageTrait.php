@@ -125,6 +125,8 @@ trait ImageTrait
 
     public function getImageName($variationName = null, $withVersion = true)
     {
+        $this->variations = $this->getVariations();
+
         if ($variationName === null) {
             reset($this->variations);
             $variationName = key($this->variations);
@@ -154,10 +156,5 @@ trait ImageTrait
     protected function getImageRootDir()
     {
         return __DIR__.'/../../../../web/' . $this->getImageDir();
-    }
-
-    protected function getImageDir()
-    {
-        return 'uploads/articles';
     }
 }

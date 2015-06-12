@@ -9,6 +9,7 @@
 
         {# <link rel="stylesheet" href="{{ asset('bower/sweetalert/lib/sweet-alert.css') }}"> #}
         {# <link rel="stylesheet" href="{{ asset('bower/foundation/css/foundation.css') }}"> #}
+        {% block styles %}{% endblock %}
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
         <!--[if lt IE 9]>
@@ -51,6 +52,7 @@
         {{ render(controller('App\\Controller\\RenderController::jsConfig', { 'transGroup': 'admin' })) }}
         {# // <script src="{{ asset('bower/sweetalert/lib/sweet-alert.js') }}"></script> #}
         {# // <script src="{{ asset('bower/foundation/js/foundation.min.js') }}"></script> #}
+        {% block scripts %}{% endblock %}
         <script src="{{ asset('js/admin.js') }}"></script>
     </body>
 </html>

@@ -1,0 +1,11 @@
+{%- block button_row -%}
+    <div class="c-admin-form__btn-row c-admin-form__btn-row--inline">
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row -%}
+
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {% set attr = attr|merge({class: 'c-btn c-btn--bg_green ' ~ (attr.class is defined ? attr.class : '') }) %}
+    {{ block('button_widget') }}
+{%- endblock submit_widget -%}

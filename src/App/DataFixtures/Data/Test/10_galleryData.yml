@@ -1,0 +1,8 @@
+
+# To disable
+# App\Entity\GalleryImage: []
+
+App\Entity\GalleryImage:
+    galery_{1..10}:
+        order (unique): <numberBetween(1, 20)>
+        setImageByPath: ['src/App/DataFixtures/resources/images/gallery/gallery_<numberBetween(1, 5)>.jpg']

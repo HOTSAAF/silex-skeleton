@@ -32,7 +32,7 @@ class ParameterCheckerCommand extends Command
     private $localTmpYmlPath;
     private $localTmpDistYmlPath;
 
-    public function __construct($rootPath, $remotePath, $localDistPath, $ftpConfig, $tmpPath = null, $tmpDir = 'parameter_checker')
+    public function __construct($rootPath, $localDistPath, $ftpConfig, $tmpPath = null, $tmpDir = 'parameter_checker')
     {
         // Cleaning the configurations
         $this->rootPath = rtrim($rootPath, '/');
@@ -119,13 +119,14 @@ class ParameterCheckerCommand extends Command
 
         // Get ftp config based on the stage
         $ftpConfig = $this->ftpConfig[$stage];
+        $remotePath = $ftpConfig['remote_path'] .'/'.$ftpConfig['parameters_yml'];
 
         $conn_id = ftp_connect($ftpConfig['host']);
         if (!@ftp_login($conn_id, $ftpConfig['user'], $ftpConfig['pass'])) {
             throw new \RuntimeException("FTP login was not successful while trying to check the remote parameters.yml file. Error:\n" . print_r(error_get_last(), true));
         }
 
-        if (!@ftp_get($conn_id, $this->localTmpYmlPath, $this->remotePath, FTP_BINARY)) {
+        if (!@ftp_get($conn_id, $this->localTmpYmlPath, $remotePath, FTP_BINARY)) {
             throw new \RuntimeException('It seems that the remote "' . basename($this->remotePath) . "\" file is not present. Implement it by the available *dist file. Error:\n" . print_r(error_get_last(), true));
         }
     }

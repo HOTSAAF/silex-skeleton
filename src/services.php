@@ -73,6 +73,9 @@ $app['service.good_to_know'] = function() use ($app) {
     $goodToKnow->addParameter('%consectetur%', function() {
         return 'consectetur';
     });
+    $goodToKnow->addParameter('%back_to_site_link%', function() use ($app) {
+        return '<a href="'. $app['url_generator']->generate('home') .'">kattintson ide</a>';
+    });
 
     return $goodToKnow;
 };
@@ -143,6 +146,12 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
 
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset, $versionOmitted = false) use ($app) {
         return $app['request_stack']->getMasterRequest()->getBasepath() . '/' . $asset . ($versionOmitted ? '' : '?v' . $app['config']['asset_version']);
+    }));
+
+
+    $twig->addFunction(new \Twig_SimpleFunction('data_attr', function($attr_name, $config) {
+        $json = json_encode($config);
+        return "data-{$attr_name}={$json}";
     }));
 
     // $twig->addTest(new Twig_SimpleTest('DateTime', function ($date) {

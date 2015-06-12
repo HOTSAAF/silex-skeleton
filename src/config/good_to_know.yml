@@ -17,3 +17,5 @@
 - {text: test_non_admin_1, group: [non_admin]}
 - {text: test_non_admin_2, group: [non_admin]}
 - {text: test_non_admin_3, group: [non_admin]}
+
+- {text: login_warning_info, group: [login_page]}
